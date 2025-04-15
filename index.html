@@ -101,29 +101,36 @@
       position: absolute;
       width: 40px;
       height: 40px;
-      background-color: #388e3c;
-      clip-path: ellipse(50% 50% at 50% 50%);
-      opacity: 0.5;
-      animation: float 10s infinite;
+      background-color: #81c784; /* Leaf Green Color */
+      clip-path: ellipse(50% 60% at 50% 50%); /* Elliptical shape for a leaf */
+      opacity: 0.8;
+      animation: float 10s infinite ease-in-out;
     }
 
     @keyframes float {
-      0% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-200px) rotate(180deg); }
-      100% { transform: translateY(0) rotate(360deg); }
+      0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+      50% { transform: translateY(-200px) rotate(180deg); opacity: 0.6; }
+      100% { transform: translateY(0) rotate(360deg); opacity: 0.8; }
     }
 
     /* Leaf positioning */
-    .leaf:nth-child(1) { top: 10%; left: 10%; animation-duration: 12s; }
-    .leaf:nth-child(2) { top: 20%; left: 30%; animation-duration: 14s; }
-    .leaf:nth-child(3) { top: 50%; left: 50%; animation-duration: 18s; }
-    .leaf:nth-child(4) { top: 70%; left: 70%; animation-duration: 16s; }
-    .leaf:nth-child(5) { top: 90%; left: 90%; animation-duration: 20s; }
+    .leaf:nth-child(1) { top: 10%; left: 5%; animation-duration: 12s; }
+    .leaf:nth-child(2) { top: 20%; left: 25%; animation-duration: 14s; }
+    .leaf:nth-child(3) { top: 30%; left: 45%; animation-duration: 16s; }
+    .leaf:nth-child(4) { top: 40%; left: 65%; animation-duration: 18s; }
+    .leaf:nth-child(5) { top: 50%; left: 85%; animation-duration: 20s; }
 
     /* Calming background audio */
     #bgAudio {
       display: none;
     }
+
+    /* Hide form initially */
+    #quote-form {
+      display: none;
+      margin-top: 2rem;
+    }
+
   </style>
 </head>
 <body>
@@ -170,7 +177,7 @@
       <li><strong>Full Admin Suite</strong> - Perfect for growing teams</li>
       <li><strong>Custom Quote</strong> - Tailored support for unique needs</li>
     </ul>
-    <a href="#quote-form" class="cta-button">Get a Quote</a>
+    <a href="javascript:void(0);" class="cta-button" onclick="toggleForm()">Get a Quote</a>
   </section>
 
   <section id="contact">
@@ -231,9 +238,16 @@
   </footer>
 
   <!-- Calming background audio -->
-  <audio id="bgAudio" controls>
+  <audio id="bgAudio" controls autoplay loop>
     <source src="calming_breeze.mp3" type="audio/mp3">
     Your browser does not support the audio element.
   </audio>
+
+  <script>
+    function toggleForm() {
+      const form = document.getElementById('quote-form');
+      form.style.display = (form.style.display === 'block') ? 'none' : 'block';
+    }
+  </script>
 </body>
 </html>
