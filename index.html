@@ -3,163 +3,182 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Whisperwind Workspace</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+  <meta name="description" content="Whisperwind Workspace offers virtual assistant services tailored to your business needs. Let us handle the details while you grow your business." />
+  <meta name="author" content="Whisperwind Workspace" />
+  <meta name="keywords" content="virtual assistant, VA services, remote support, business growth, executive assistant, customer service" />
+  <title>Whisperwind Workspace - Virtual Support for Your Business</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
+    /* General Styles */
     body {
       font-family: 'Inter', sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #F4F9F9;
-      color: #4B636E;
-      background-image: url('https://www.transparenttextures.com/patterns/white-feathers.png');
+      background-color: #f0f8ff; /* Light blue */
+      color: #333;
+      transition: background-color 0.3s ease;
     }
+
     header {
-      background-color: #B8D8D8;
-      color: #4B636E;
+      background-color: #a2d9c7; /* Breeze green */
+      color: white;
       padding: 2rem;
       text-align: center;
-      position: relative;
+      font-size: 2.5rem;
     }
-    header p {
-      font-family: 'Great Vibes', cursive;
-      font-size: 1.5rem;
-      margin-top: 0.5rem;
-    }
+
     nav a {
       margin: 0 1rem;
-      color: #4B636E;
+      color: white;
       text-decoration: none;
       font-weight: 600;
     }
+
     section {
       padding: 4rem 2rem;
       max-width: 1000px;
       margin: auto;
     }
+
     h2 {
-      color: #5DA9A7;
+      color: #a2d9c7; /* Breeze green */
+      font-size: 2.5rem;
     }
+
     footer {
       text-align: center;
       padding: 2rem;
-      background-color: #DFF5F2;
-      color: #4B636E;
+      background-color: #eaeaea;
     }
+
     .cta-button {
       display: inline-block;
       margin-top: 1rem;
       padding: 0.75rem 1.5rem;
-      background-color: #5DA9A7;
+      background-color: #a2d9c7; /* Breeze green */
       color: white;
       text-decoration: none;
       border-radius: 8px;
     }
+
+    /* Modal Styles */
     .modal {
       display: none;
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 999;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
       justify-content: center;
       align-items: center;
     }
+
     .modal-content {
-      background-color: #fff;
-      padding: 2rem;
-      border-radius: 10px;
-      max-width: 500px;
-      width: 90%;
-      position: relative;
-      animation: fadeIn 0.5s ease;
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      width: 70%;
+      max-width: 600px;
+      animation: modal-entrance 0.3s ease;
     }
-    .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 15px;
+
+    @keyframes modal-entrance {
+      from {
+        transform: scale(0.7);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .modal-close {
       background: none;
       border: none;
-      font-size: 20px;
+      font-size: 1.5rem;
+      color: #333;
+      position: absolute;
+      top: 10px;
+      right: 10px;
       cursor: pointer;
-      color: #5DA9A7;
     }
-    label.required::after {
-      content: ' *';
-      color: red;
-    }
-    input, select {
-      width: 100%;
-      padding: 0.5rem;
-      margin-top: 0.25rem;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-    .error {
-      border-color: red !important;
-    }
-    @keyframes fadeIn {
-      from { transform: scale(0.95); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-    #audioToggle {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #5DA9A7;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      font-size: 24px;
-      cursor: pointer;
-      z-index: 1000;
-    }
-    .feather-icon {
+
+    /* Floating Leaf Animation */
+    .leaf {
       position: absolute;
       width: 40px;
-      opacity: 0.3;
-      animation: drift 12s infinite ease-in-out;
+      height: 40px;
+      background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/7c/Feather_example.svg'); /* Light feather */
+      background-size: contain;
+      background-repeat: no-repeat;
+      opacity: 0.8;
+      animation: float 10s infinite ease-in-out;
     }
-    .feather-icon:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
-    .feather-icon:nth-child(2) { top: 30%; left: 80%; animation-delay: 4s; }
-    .feather-icon:nth-child(3) { top: 50%; left: 20%; animation-delay: 2s; }
-    @keyframes drift {
-      0% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(40px) rotate(15deg); }
-      100% { transform: translateY(0) rotate(0deg); }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+      50% { transform: translateY(-200px) rotate(180deg); opacity: 0.6; }
+      100% { transform: translateY(0) rotate(360deg); opacity: 0.8; }
     }
+
+    /* Floating Leaf Positioning */
+    .leaf:nth-child(1) { top: 10%; left: 5%; animation-duration: 12s; }
+    .leaf:nth-child(2) { top: 20%; left: 25%; animation-duration: 14s; }
+    .leaf:nth-child(3) { top: 30%; left: 45%; animation-duration: 16s; }
+    .leaf:nth-child(4) { top: 40%; left: 65%; animation-duration: 18s; }
+    .leaf:nth-child(5) { top: 50%; left: 85%; animation-duration: 20s; }
+
+    /* Audio Toggle Styles */
+    #audioToggle {
+      background: none;
+      border: none;
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      z-index: 999;
+      cursor: pointer;
+    }
+
+    /* Tooltip Styling */
+    .tooltip {
+      visibility: hidden;
+      background-color: #555;
+      color: #fff;
+      text-align: center;
+      border-radius: 5px;
+      padding: 5px;
+      position: absolute;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+    }
+
+    #audioToggle:hover .tooltip {
+      visibility: visible;
+    }
+
+    /* Responsive Design */
     @media (max-width: 768px) {
-      nav a {
-        display: block;
-        margin: 0.5rem 0;
+      header {
+        font-size: 2rem;
       }
-      .feather-icon { display: none; }
+
+      section {
+        padding: 2rem 1rem;
+      }
+
+      .modal-content {
+        width: 90%;
+      }
     }
   </style>
-
-  <!-- Schema Markup for SEO -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Whisperwind Workspace",
-    "url": "https://yourdomain.github.io/",
-    "logo": "https://yourdomain.github.io/logo.png",
-    "email": "mailto:whisperwindworkspace@gmail.com",
-    "sameAs": [
-      "https://www.instagram.com/yourpage",
-      "https://www.linkedin.com/company/yourpage"
-    ]
-  }
-  </script>
 </head>
 <body>
-  <div class="feather-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Feather_icon.svg" width="40" /></div>
-  <div class="feather-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Feather_icon.svg" width="40" /></div>
-  <div class="feather-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Feather_icon.svg" width="40" /></div>
-
+  <!-- Header Section -->
   <header>
     <h1>Whisperwind Workspace</h1>
     <p>Where Virtual Support Meets Real Results</p>
@@ -171,11 +190,13 @@
     </nav>
   </header>
 
+  <!-- About Section -->
   <section id="about">
     <h2>About Us</h2>
-    <p>Whisperwind Workspace provides dependable, intuitive virtual support tailored to your business needs. Let us simplify your workload so you can grow your business.</p>
+    <p>Whisperwind Workspace was founded to provide dependable, professional, and intuitive virtual support tailored to your business needs. Our mission is to simplify your workload so you can focus on what matters most—growing your business.</p>
   </section>
 
+  <!-- Services Section -->
   <section id="services">
     <h2>Our Services</h2>
     <ul>
@@ -188,84 +209,110 @@
     </ul>
   </section>
 
+  <!-- Pricing Section -->
   <section id="pricing">
     <h2>Pricing</h2>
+    <p>We offer flexible packages to fit your business needs:</p>
     <ul>
-      <li><strong>Starter VA Support</strong> - Ideal for solo entrepreneurs</li>
-      <li><strong>Full Admin Suite</strong> - Perfect for growing teams</li>
-      <li><strong>Custom Quote</strong> - Tailored support for unique needs</li>    
+      <li><strong>Starter VA Support</strong> - $400/month</li>
+      <li><strong>Full Admin Suite</strong> - $800/month</li>
+      <li><strong>Custom Quote</strong> - Tailored support for unique needs</li>
     </ul>
-    <a href="#" class="cta-button" onclick="document.getElementById('quoteModal').style.display='flex'">Get a Quote</a>
+    <a href="#contact" class="cta-button" onclick="showModal()">Get a Quote</a>
   </section>
 
+  <!-- Contact Section -->
   <section id="contact">
     <h2>Contact Us</h2>
-    <p>Email: <a href="mailto:whisperwindworkspace@gmail.com">whisperwindworkspace@gmail.com</a></p>
-    <p>Follow us on social media for updates and insights.</p>
+    <p>Email us at <a href="mailto:whisperwindworkspace@gmail.com">whisperwindworkspace@gmail.com</a></p>
   </section>
 
-  <footer>
-    <p>&copy; 2025 Whisperwind Workspace. All rights reserved.</p>
-  </footer>
-
-  <!-- Modal -->
-  <div id="quoteModal" class="modal">
+  <!-- Modal for Quote Form -->
+  <div class="modal" id="quoteModal">
     <div class="modal-content">
-      <button class="close-btn" onclick="document.getElementById('quoteModal').style.display='none'">&times;</button>
-      <h2>Request a Quote</h2>
-      <form action="https://formspree.io/f/mkgjevkn" method="POST" onsubmit="return validateForm()">
-        <label class="required">Name</label>
-        <input type="text" name="name" required>
-        <label class="required">Email</label>
-        <input type="email" name="email" required>
-        <label class="required">Phone Number</label>
-        <input type="tel" name="phone" required>
-        <label class="required">Timezone</label>
-        <input type="text" name="timezone" required>
-        <label>Type of VA Needed</label>
-        <select name="type">
-          <option value="">Select</option>
-          <option>Executive Assistant</option>
-          <option>Customer Support</option>
-          <option>Project Manager</option>
-          <option>Data Entry</option>
-          <option>Other</option>
-        </select>
-        <label>Business Industry</label>
-        <input type="text" name="industry">
-        <button type="submit" class="cta-button">Submit</button>
+      <button class="modal-close" onclick="closeModal()">X</button>
+      <h3>Get a Quote</h3>
+      <form action="https://formspree.io/f/mkgjevkn" method="POST" id="quoteForm">
+        <label for="name">Name (Required)</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">Email (Required)</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="phone">Phone</label>
+        <input type="text" id="phone" name="phone"><br><br>
+
+        <label for="timezone">Timezone (Required)</label>
+        <select id="timezone" name="timezone" required>
+          <option value="">Select Timezone</option>
+          <option value="EST">Eastern Standard Time</option>
+          <option value="CST">Central Standard Time</option>
+          <option value="PST">Pacific Standard Time</option>
+        </select><br><br>
+
+        <label for="service">Type of VA (Required)</label>
+        <select id="service" name="service" required>
+          <option value="">Select VA Service</option>
+          <option value="Executive Assistant">Executive Assistant</option>
+          <option value="Inbox Management">Inbox Management</option>
+          <option value="Customer Support">Customer Support</option>
+          <option value="Project Coordination">Project Coordination</option>
+        </select><br><br>
+
+        <input type="submit" value="Submit">
       </form>
     </div>
   </div>
 
-  <!-- Audio Toggle -->
-  <audio id="bgAudio" loop>
-    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_6db309d522.mp3" type="audio/mp3">
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; 2025 Whisperwind Workspace. All rights reserved.</p>
+  </footer>
+
+  <!-- Audio Toggle Button -->
+  <button id="audioToggle">
+    <img src="audio-on-icon.svg" alt="Audio Icon" id="audioIcon" />
+    <div class="tooltip">Mute/Unmute Audio</div>
+  </button>
+
+  <!-- Floating Leaves -->
+  <div class="leaf"></div>
+  <div class="leaf"></div>
+  <div class="leaf"></div>
+  <div class="leaf"></div>
+  <div class="leaf"></div>
+
+  <!-- Background Audio -->
+  <audio id="backgroundAudio" loop>
+    <source src="your-breeze-audio.mp3" type="audio/mp3">
   </audio>
-  <button id="audioToggle" onclick="toggleAudio()">🎵</button>
 
   <script>
-    const audio = document.getElementById('bgAudio');
-    let playing = false;
-    function toggleAudio() {
-      playing = !playing;
-      if (playing) audio.play();
-      else audio.pause();
+    // Modal Show & Hide
+    function showModal() {
+      document.getElementById("quoteModal").style.display = "flex";
     }
 
-    function validateForm() {
-      const inputs = document.querySelectorAll('#quoteModal input[required]');
-      let valid = true;
-      inputs.forEach(input => {
-        if (!input.value) {
-          input.classList.add('error');
-          valid = false;
-        } else {
-          input.classList.remove('error');
-        }
-      });
-      return valid;
+    function closeModal() {
+      document.getElementById("quoteModal").style.display = "none";
     }
+
+    // Background Audio Toggle
+    const audio = document.getElementById("backgroundAudio");
+    const audioToggle = document.getElementById("audioToggle");
+    const audioIcon = document.getElementById("audioIcon");
+
+    audio.play();
+
+    audioToggle.addEventListener("click", function() {
+      if (audio.paused) {
+        audio.play();
+        audioIcon.src = "audio-on-icon.svg";
+      } else {
+        audio.pause();
+        audioIcon.src = "audio-off-icon.svg";
+      }
+    });
   </script>
 </body>
 </html>
