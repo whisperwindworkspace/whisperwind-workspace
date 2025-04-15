@@ -138,6 +138,22 @@
       .feather-icon { display: none; }
     }
   </style>
+
+  <!-- Schema Markup for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Whisperwind Workspace",
+    "url": "https://yourdomain.github.io/",
+    "logo": "https://yourdomain.github.io/logo.png",
+    "email": "mailto:whisperwindworkspace@gmail.com",
+    "sameAs": [
+      "https://www.instagram.com/yourpage",
+      "https://www.linkedin.com/company/yourpage"
+    ]
+  }
+  </script>
 </head>
 <body>
   <div class="feather-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Feather_icon.svg" width="40" /></div>
@@ -205,50 +221,48 @@
         <label class="required">Phone Number</label>
         <input type="tel" name="phone" required>
         <label class="required">Timezone</label>
-        <input type="text" name="timezone" required>
-        <label>Type of VA Needed</label>
-        <select name="type">
-          <option value="">Select</option>
-          <option>Executive Assistant</option>
-          <option>Customer Support</option>
-          <option>Project Manager</option>
-          <option>Data Entry</option>
-          <option>Other</option>
+        <select name="timezone" required>
+          <option value="">Select Timezone</option>
+          <option value="Pacific/Midway">Midway Island (UTC-11:00)</option>
+          <option value="Pacific/Honolulu">Hawaii-Aleutian Standard Time (UTC-10:00)</option>
+          <option value="America/Anchorage">Alaska Standard Time (UTC-09:00)</option>
+          <option value="America/Los_Angeles">Pacific Standard Time (UTC-08:00)</option>
+          <option value="America/Denver">Mountain Standard Time (UTC-07:00)</option>
+          <option value="America/Chicago">Central Standard Time (UTC-06:00)</option>
+          <option value="America/New_York">Eastern Standard Time (UTC-05:00)</option>
+          <option value="America/Caracas">Venezuela Time (UTC-04:00)</option>
+          <option value="America/Sao_Paulo">Brasília Time (UTC-03:00)</option>
+          <option value="Atlantic/Azores">Azores Time (UTC-01:00)</option>
+          <option value="Europe/Lisbon">Western European Time (UTC+00:00)</option>
+          <option value="Europe/Paris">Central European Time (UTC+01:00)</option>
+          <option value="Africa/Nairobi">East Africa Time (UTC+03:00)</option>
+          <option value="Asia/Dubai">Gulf Standard Time (UTC+04:00)</option>
+          <option value="Asia/Kolkata">Indian Standard Time (UTC+05:00)</option>
+          <option value="Asia/Dhaka">Bangladesh Standard Time (UTC+06:00)</option>
+          <option value="Asia/Jakarta">Western Indonesian Time (UTC+07:00)</option>
+          <option value="Asia/Singapore">Singapore Standard Time (UTC+08:00)</option>
+          <option value="Asia/Tokyo">Japan Standard Time (UTC+09:00)</option>
+          <option value="Australia/Sydney">Australian Eastern Standard Time (UTC+10:00)</option>
+          <option value="Pacific/Noumea">New Caledonia Time (UTC+11:00)</option>
+          <option value="Pacific/Fiji">Fiji Time (UTC+12:00)</option>
         </select>
-        <label>Business Industry</label>
-        <input type="text" name="industry">
+        <label class="required">Move Details</label>
+        <input type="text" name="move_details" required>
+        <label>Household Inventory</label>
+        <textarea name="inventory"></textarea>
+        <label>Storage Plan</label>
+        <textarea name="storage_plan"></textarea>
+        <label>Request</label>
+        <textarea name="request"></textarea>
         <button type="submit" class="cta-button">Submit</button>
       </form>
     </div>
   </div>
 
-  <!-- Audio Toggle -->
-  <audio id="bgAudio" loop>
-    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_6db309d522.mp3" type="audio/mp3">
-  </audio>
-  <button id="audioToggle" onclick="toggleAudio()">🎵</button>
-
   <script>
-    const audio = document.getElementById('bgAudio');
-    let playing = false;
-    function toggleAudio() {
-      playing = !playing;
-      if (playing) audio.play();
-      else audio.pause();
-    }
-
-    function validateForm() {
-      const inputs = document.querySelectorAll('#quoteModal input[required]');
-      let valid = true;
-      inputs.forEach(input => {
-        if (!input.value) {
-          input.classList.add('error');
-          valid = false;
-        } else {
-          input.classList.remove('error');
-        }
-      });
-      return valid;
+    document.getElementById('audioToggle').onclick = function() {
+      const audio = new Audio('path_to_your_audio_file.mp3');
+      audio.play();
     }
   </script>
 </body>
