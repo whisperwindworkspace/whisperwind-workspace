@@ -3,55 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Whisperwind Workspace | Virtual Assistant Services</title>
-
-  <!-- SEO / Meta Tags -->
-  <meta name="description" content="Whisperwind Workspace offers reliable, professional virtual assistant services tailored for entrepreneurs and growing teams." />
-  <meta name="keywords" content="Virtual Assistant, Executive Assistant, Remote Assistant, Whisperwind Workspace, Online Assistant, Virtual Help" />
+  <meta name="description" content="Whisperwind Workspace provides virtual assistant services with a breeze. We offer executive assistance, customer support, data entry, and more." />
+  <meta name="keywords" content="Virtual Assistant, Executive Assistance, Project Coordination, Business Support, Remote Services" />
   <meta name="author" content="Whisperwind Workspace" />
-  <meta property="og:title" content="Whisperwind Workspace | Virtual Assistant Services" />
-  <meta property="og:description" content="Your breezy, dependable partner for virtual support. Get a quote today!" />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://yourdomain.com/logo-preview.jpg" />
-  <meta property="og:url" content="https://yourdomain.com" />
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4277/4277835.png" type="image/png" />
-
-  <!-- Fonts & Icons -->
+  <title>Whisperwind Workspace</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-
   <style>
-    :root {
-      --primary: #4CAF50;
-      --primary-light: #e8f5e9;
-      --text-dark: #2e3d2f;
-      --accent: #81c784;
-    }
-
     body {
       font-family: 'Inter', sans-serif;
       margin: 0;
       padding: 0;
-      background-color: var(--primary-light);
-      color: var(--text-dark);
+      background-color: #e0f7fa;
+      color: #333;
+      position: relative;
       overflow-x: hidden;
     }
 
     header {
-      background: linear-gradient(to right, #a8e6cf, #dcedc1);
+      background-color: #388e3c;
+      color: white;
       padding: 2rem;
       text-align: center;
-      position: relative;
     }
 
     nav a {
       margin: 0 1rem;
-      color: var(--text-dark);
+      color: white;
       text-decoration: none;
       font-weight: 600;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
     }
 
     section {
@@ -61,150 +40,100 @@
     }
 
     h2 {
-      color: var(--primary);
+      color: #388e3c;
     }
 
     footer {
       text-align: center;
       padding: 2rem;
-      background-color: #d0e8d0;
+      background-color: #eaeaea;
     }
 
     .cta-button {
       display: inline-block;
       margin-top: 1rem;
       padding: 0.75rem 1.5rem;
-      background-color: var(--primary);
+      background-color: #388e3c;
       color: white;
       text-decoration: none;
       border-radius: 8px;
-      transition: background 0.3s;
     }
 
-    .cta-button:hover {
-      background-color: #388e3c;
+    .required {
+      color: red;
+      font-weight: bold;
     }
 
-    #quoteModal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 1000;
+    input:invalid, select:invalid, textarea:invalid {
+      border: 2px solid red;
+      background-color: #fdd;
     }
 
-    .modal-content {
-      background: white;
-      max-width: 500px;
-      margin: 5% auto;
-      padding: 2rem;
-      border-radius: 12px;
-      position: relative;
-      transform: translateY(-30px);
-      opacity: 0;
-      transition: all 0.4s ease-in-out;
+    input:invalid:focus, select:invalid:focus, textarea:invalid:focus {
+      outline: none;
+      box-shadow: 0 0 5px red;
     }
 
-    #quoteModal.show .modal-content {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    .modal-content input,
-    .modal-content select,
-    .modal-content textarea {
-      width: 100%;
-      padding: 0.6rem;
+    input, select, textarea {
+      padding: 0.75rem;
       margin-bottom: 1rem;
+      width: 100%;
+      font-size: 1rem;
+      border-radius: 5px;
       border: 1px solid #ccc;
-      border-radius: 6px;
     }
 
-    .modal-content button {
-      background: var(--primary);
-      color: white;
-      padding: 0.75rem 1.5rem;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .modal-content button:hover {
-      background-color: #388e3c;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      color: #777;
-      cursor: pointer;
+    input:focus, select:focus, textarea:focus {
+      border-color: #388e3c;
+      outline: none;
     }
 
     #successMessage {
       display: none;
-      text-align: center;
-      margin-top: 1rem;
-      color: var(--primary);
-      font-weight: 600;
+      color: green;
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-top: 10px;
     }
 
-    /* Floating Leaves Animation */
+    /* Floating leaves animation */
     .leaf {
-      position: fixed;
+      position: absolute;
       width: 40px;
       height: 40px;
-      opacity: 0.3;
-      animation: float 15s linear infinite;
-      z-index: 0;
+      background-color: #388e3c;
+      clip-path: ellipse(50% 50% at 50% 50%);
+      opacity: 0.5;
+      animation: float 10s infinite;
     }
 
     @keyframes float {
-      0% {
-        transform: translateY(-100px) rotate(0deg);
-        opacity: 0.4;
-      }
-      50% {
-        opacity: 0.6;
-      }
-      100% {
-        transform: translateY(100vh) rotate(360deg);
-        opacity: 0;
-      }
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-200px) rotate(180deg); }
+      100% { transform: translateY(0) rotate(360deg); }
     }
 
-    /* Position multiple leaves at different spots */
-    .leaf:nth-child(1) { left: 10%; animation-delay: 0s; }
-    .leaf:nth-child(2) { left: 30%; animation-delay: 3s; }
-    .leaf:nth-child(3) { left: 50%; animation-delay: 6s; }
-    .leaf:nth-child(4) { left: 70%; animation-delay: 1.5s; }
-    .leaf:nth-child(5) { left: 90%; animation-delay: 4s; }
+    /* Leaf positioning */
+    .leaf:nth-child(1) { top: 10%; left: 10%; animation-duration: 12s; }
+    .leaf:nth-child(2) { top: 20%; left: 30%; animation-duration: 14s; }
+    .leaf:nth-child(3) { top: 50%; left: 50%; animation-duration: 18s; }
+    .leaf:nth-child(4) { top: 70%; left: 70%; animation-duration: 16s; }
+    .leaf:nth-child(5) { top: 90%; left: 90%; animation-duration: 20s; }
 
-    /* Audio Toggle Button */
-    #audioToggle {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: var(--accent);
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 30px;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-      z-index: 1001;
-    }
-
-    #audioToggle:hover {
-      background: #66bb6a;
+    /* Calming background audio */
+    #bgAudio {
+      display: none;
     }
   </style>
 </head>
 <body>
+  <!-- Floating leaves -->
+  <div class="leaf"></div>
+  <div class="leaf"></div>
+  <div class="leaf"></div>
+  <div class="leaf"></div>
+  <div class="leaf"></div>
+
   <header>
     <h1>Whisperwind Workspace</h1>
     <p>Where Virtual Support Meets Real Results</p>
@@ -215,13 +144,6 @@
       <a href="#contact">Contact</a>
     </nav>
   </header>
-
-  <!-- Floating leaves -->
-  <img src="https://cdn-icons-png.flaticon.com/512/4277/4277835.png" class="leaf" />
-  <img src="https://cdn-icons-png.flaticon.com/512/4277/4277835.png" class="leaf" />
-  <img src="https://cdn-icons-png.flaticon.com/512/4277/4277835.png" class="leaf" />
-  <img src="https://cdn-icons-png.flaticon.com/512/4277/4277835.png" class="leaf" />
-  <img src="https://cdn-icons-png.flaticon.com/512/4277/4277835.png" class="leaf" />
 
   <section id="about">
     <h2>About Us</h2>
@@ -248,7 +170,7 @@
       <li><strong>Full Admin Suite</strong> - Perfect for growing teams</li>
       <li><strong>Custom Quote</strong> - Tailored support for unique needs</li>
     </ul>
-    <a href="#" class="cta-button">Get a Quote</a>
+    <a href="#quote-form" class="cta-button">Get a Quote</a>
   </section>
 
   <section id="contact">
@@ -257,101 +179,61 @@
     <p>Follow us on social media for updates and insights.</p>
   </section>
 
+  <!-- Quote form -->
+  <section id="quote-form">
+    <h2>Get a Quote</h2>
+    <form id="quoteForm" action="https://formspree.io/f/mkgjevkn" method="POST">
+      <label for="name">Your Name <span class="required">*</span></label>
+      <input type="text" name="name" id="name" placeholder="Your Name *" required />
+
+      <label for="email">Your Email <span class="required">*</span></label>
+      <input type="email" name="email" id="email" placeholder="Your Email *" required />
+
+      <label for="phone">Phone Number <span class="required">*</span></label>
+      <input type="tel" name="phone" id="phone" placeholder="Phone Number *" required />
+
+      <label for="va-type">Type of VA Needed</label>
+      <select name="va-type" id="va-type">
+        <option value="">Select</option>
+        <option>Executive Assistant</option>
+        <option>Inbox & Calendar Management</option>
+        <option>Customer Support</option>
+        <option>Data Entry & Reporting</option>
+        <option>Project Coordination</option>
+        <option>Custom VA Package</option>
+      </select>
+
+      <label for="industry">Business Industry</label>
+      <input type="text" name="industry" id="industry" placeholder="Business Industry" />
+
+      <label for="timezone">Timezone <span class="required">*</span></label>
+      <select name="timezone" id="timezone" required>
+        <option value="">Your Timezone *</option>
+        <option>PST</option>
+        <option>MST</option>
+        <option>CST</option>
+        <option>EST</option>
+        <option>GMT</option>
+        <option>IST</option>
+        <option>AEST</option>
+      </select>
+
+      <label for="message">Additional Details</label>
+      <textarea name="message" id="message" placeholder="Additional Details" rows="4"></textarea>
+
+      <button type="submit">Submit</button>
+      <div id="successMessage">Thank you! We'll be in touch soon.</div>
+    </form>
+  </section>
+
   <footer>
     <p>&copy; 2025 Whisperwind Workspace. All rights reserved.</p>
   </footer>
 
-  <!-- Modal -->
-  <div id="quoteModal">
-    <div class="modal-content">
-      <button class="close-btn" onclick="closeModal()">&times;</button>
-      <h2>Request a Quote</h2>
-      <form id="quoteForm" action="https://formspree.io/f/mkgjevkn" method="POST">
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="email" name="email" placeholder="Your Email" required />
-        <input type="tel" name="phone" placeholder="Phone Number" required />
-        <select name="va-type" required>
-          <option value="">Type of VA Needed</option>
-          <option>Executive Assistant</option>
-          <option>Inbox & Calendar Management</option>
-          <option>Customer Support</option>
-          <option>Data Entry & Reporting</option>
-          <option>Project Coordination</option>
-          <option>Custom VA Package</option>
-        </select>
-        <input type="text" name="industry" placeholder="Business Industry" required />
-        <select name="timezone" required>
-          <option value="">Your Timezone</option>
-          <option>PST</option>
-          <option>MST</option>
-          <option>CST</option>
-          <option>EST</option>
-          <option>GMT</option>
-          <option>IST</option>
-          <option>AEST</option>
-        </select>
-        <textarea name="message" placeholder="Additional Details" rows="4"></textarea>
-        <button type="submit">Submit</button>
-        <div id="successMessage">Thank you! We'll be in touch soon.</div>
-      </form>
-    </div>
-  </div>
-
-  <!-- Audio Toggle Button -->
-  <button id="audioToggle">🔊 Music On</button>
-  <audio id="bgAudio" loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_f07f0d6aa4.mp3?filename=soft-piano-ambient-11069.mp3" type="audio/mp3">
+  <!-- Calming background audio -->
+  <audio id="bgAudio" controls>
+    <source src="calming_breeze.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
   </audio>
-
-  <script>
-    // Modal Logic
-    const quoteModal = document.getElementById('quoteModal');
-    document.querySelector('.cta-button').addEventListener('click', function(e) {
-      e.preventDefault();
-      quoteModal.classList.add('show');
-      quoteModal.style.display = 'block';
-    });
-
-    function closeModal() {
-      quoteModal.classList.remove('show');
-      setTimeout(() => quoteModal.style.display = 'none', 300);
-    }
-
-    // Form Submit
-    document.getElementById('quoteForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      const form = e.target;
-      const data = new FormData(form);
-      fetch(form.action, {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      }).then(response => {
-        if (response.ok) {
-          document.getElementById('successMessage').style.display = 'block';
-          form.reset();
-        } else {
-          alert("There was a problem submitting the form.");
-        }
-      }).catch(() => alert("Something went wrong."));
-    });
-
-    // Audio Toggle
-    const audio = document.getElementById("bgAudio");
-    const toggle = document.getElementById("audioToggle");
-    let isPlaying = false;
-
-    toggle.addEventListener("click", function () {
-      if (!isPlaying) {
-        audio.play();
-        toggle.textContent = "🔇 Music Off";
-        isPlaying = true;
-      } else {
-        audio.pause();
-        toggle.textContent = "🔊 Music On";
-        isPlaying = false;
-      }
-    });
-  </script>
 </body>
 </html>
