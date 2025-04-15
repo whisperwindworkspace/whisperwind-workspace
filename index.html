@@ -96,6 +96,51 @@
       margin-top: 10px;
     }
 
+    /* Modal container */
+    #quoteModal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Modal content */
+    .modal-content {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 8px;
+      max-width: 500px;
+      width: 90%;
+      animation: modalEntrance 0.5s ease-out;
+    }
+
+    @keyframes modalEntrance {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    /* Close button for modal */
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1.5rem;
+      color: #388e3c;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .close-btn:hover {
+      color: red;
+    }
+
     /* Floating leaves animation */
     .leaf {
       position: absolute;
@@ -123,12 +168,6 @@
     /* Calming background audio */
     #bgAudio {
       display: none;
-    }
-
-    /* Hide form initially */
-    #quote-form {
-      display: none;
-      margin-top: 2rem;
     }
 
   </style>
@@ -177,7 +216,7 @@
       <li><strong>Full Admin Suite</strong> - Perfect for growing teams</li>
       <li><strong>Custom Quote</strong> - Tailored support for unique needs</li>
     </ul>
-    <a href="javascript:void(0);" class="cta-button" onclick="toggleForm()">Get a Quote</a>
+    <a href="javascript:void(0);" class="cta-button" onclick="openModal()">Get a Quote</a>
   </section>
 
   <section id="contact">
@@ -186,52 +225,55 @@
     <p>Follow us on social media for updates and insights.</p>
   </section>
 
-  <!-- Quote form -->
-  <section id="quote-form">
-    <h2>Get a Quote</h2>
-    <form id="quoteForm" action="https://formspree.io/f/mkgjevkn" method="POST">
-      <label for="name">Your Name <span class="required">*</span></label>
-      <input type="text" name="name" id="name" placeholder="Your Name *" required />
+  <!-- Modal for Quote Form -->
+  <div id="quoteModal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeModal()">&times;</button>
+      <h2>Get a Quote</h2>
+      <form id="quoteForm" action="https://formspree.io/f/mkgjevkn" method="POST">
+        <label for="name">Your Name <span class="required">*</span></label>
+        <input type="text" name="name" id="name" placeholder="Your Name *" required />
 
-      <label for="email">Your Email <span class="required">*</span></label>
-      <input type="email" name="email" id="email" placeholder="Your Email *" required />
+        <label for="email">Your Email <span class="required">*</span></label>
+        <input type="email" name="email" id="email" placeholder="Your Email *" required />
 
-      <label for="phone">Phone Number <span class="required">*</span></label>
-      <input type="tel" name="phone" id="phone" placeholder="Phone Number *" required />
+        <label for="phone">Phone Number <span class="required">*</span></label>
+        <input type="tel" name="phone" id="phone" placeholder="Phone Number *" required />
 
-      <label for="va-type">Type of VA Needed</label>
-      <select name="va-type" id="va-type">
-        <option value="">Select</option>
-        <option>Executive Assistant</option>
-        <option>Inbox & Calendar Management</option>
-        <option>Customer Support</option>
-        <option>Data Entry & Reporting</option>
-        <option>Project Coordination</option>
-        <option>Custom VA Package</option>
-      </select>
+        <label for="va-type">Type of VA Needed</label>
+        <select name="va-type" id="va-type">
+          <option value="">Select</option>
+          <option>Executive Assistant</option>
+          <option>Inbox & Calendar Management</option>
+          <option>Customer Support</option>
+          <option>Data Entry & Reporting</option>
+          <option>Project Coordination</option>
+          <option>Custom VA Package</option>
+        </select>
 
-      <label for="industry">Business Industry</label>
-      <input type="text" name="industry" id="industry" placeholder="Business Industry" />
+        <label for="industry">Business Industry</label>
+        <input type="text" name="industry" id="industry" placeholder="Business Industry" />
 
-      <label for="timezone">Timezone <span class="required">*</span></label>
-      <select name="timezone" id="timezone" required>
-        <option value="">Your Timezone *</option>
-        <option>PST</option>
-        <option>MST</option>
-        <option>CST</option>
-        <option>EST</option>
-        <option>GMT</option>
-        <option>IST</option>
-        <option>AEST</option>
-      </select>
+        <label for="timezone">Timezone <span class="required">*</span></label>
+        <select name="timezone" id="timezone" required>
+          <option value="">Your Timezone *</option>
+          <option>PST</option>
+          <option>MST</option>
+          <option>CST</option>
+          <option>EST</option>
+          <option>GMT</option>
+          <option>IST</option>
+          <option>AEST</option>
+        </select>
 
-      <label for="message">Additional Details</label>
-      <textarea name="message" id="message" placeholder="Additional Details" rows="4"></textarea>
+        <label for="message">Additional Details</label>
+        <textarea name="message" id="message" placeholder="Additional Details" rows="4"></textarea>
 
-      <button type="submit">Submit</button>
-      <div id="successMessage">Thank you! We'll be in touch soon.</div>
-    </form>
-  </section>
+        <button type="submit">Submit</button>
+        <div id="successMessage">Thank you! We'll be in touch soon.</div>
+      </form>
+    </div>
+  </div>
 
   <footer>
     <p>&copy; 2025 Whisperwind Workspace. All rights reserved.</p>
@@ -244,9 +286,14 @@
   </audio>
 
   <script>
-    function toggleForm() {
-      const form = document.getElementById('quote-form');
-      form.style.display = (form.style.display === 'block') ? 'none' : 'block';
+    // Open modal
+    function openModal() {
+      document.getElementById('quoteModal').style.display = 'flex';
+    }
+
+    // Close modal
+    function closeModal() {
+      document.getElementById('quoteModal').style.display = 'none';
     }
   </script>
 </body>
