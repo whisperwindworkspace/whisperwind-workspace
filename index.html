@@ -46,35 +46,54 @@
       color: white;
       text-decoration: none;
       border-radius: 8px;
-      cursor: pointer;
     }
-    form {
-      background-color: white;
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      margin-top: 2rem;
-    }
-    input, select, textarea {
-      width: 100%;
-      padding: 0.75rem;
-      margin: 1rem 0;
-      border-radius: 8px;
-      border: 1px solid #ddd;
-    }
-    button {
-      padding: 0.75rem 1.5rem;
-      background-color: #6a5acd;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #5c4da1;
-    }
-    #quote-form {
+    /* Modal styling */
+    #quoteModal {
       display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1000;
+    }
+    .modal-content {
+      background: #fff;
+      max-width: 500px;
+      margin: 5% auto;
+      padding: 2rem;
+      border-radius: 10px;
+      position: relative;
+    }
+    .modal-content input,
+    .modal-content select,
+    .modal-content textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .modal-content button {
+      background: #6a5acd;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+    #successMessage {
+      display: none;
+      text-align: center;
+      margin-top: 1rem;
+      color: green;
+      font-weight: 600;
     }
   </style>
 </head>
@@ -115,28 +134,37 @@
       <li><strong>Full Admin Suite</strong> - Perfect for growing teams</li>
       <li><strong>Custom Quote</strong> - Tailored support for unique needs</li>
     </ul>
-    <a href="#contact" class="cta-button" onclick="document.getElementById('quote-form').style.display='block';">Get a Quote</a>
+    <a href="#" class="cta-button">Get a Quote</a>
   </section>
 
   <section id="contact">
     <h2>Contact Us</h2>
     <p>Email us at <a href="mailto:whisperwindworkspace@gmail.com">whisperwindworkspace@gmail.com</a></p>
     <p>Follow us on social media for updates and insights.</p>
+  </section>
 
-    <div id="quote-form">
-      <h3>Request a Quote</h3>
-      <form action="#" method="POST">
+  <footer>
+    <p>&copy; 2025 Whisperwind Workspace. All rights reserved.</p>
+  </footer>
+
+  <!-- Modal -->
+  <div id="quoteModal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeModal()">&times;</button>
+      <h2>Request a Quote</h2>
+      <form id="quoteForm" action="https://formspree.io/f/mkgjevkn" method="POST">
         <label for="name">Your Name</label>
-        <input type="text" id="name" name="name" required>
+        <input type="text" name="name" id="name" required />
 
-        <label for="email">Your Email Address</label>
-        <input type="email" id="email" name="email" required>
+        <label for="email">Your Email</label>
+        <input type="email" name="email" id="email" required />
 
-        <label for="phone">Your Phone Number</label>
-        <input type="tel" id="phone" name="phone" required>
+        <label for="phone">Phone Number</label>
+        <input type="tel" name="phone" id="phone" required />
 
         <label for="va-type">Type of VA Needed</label>
-        <select id="va-type" name="va-type" required>
+        <select name="va-type" id="va-type" required>
+          <option value="">Select an option</option>
           <option value="executive-assistant">Executive Assistant</option>
           <option value="calendar-management">Inbox & Calendar Management</option>
           <option value="customer-support">Customer Support</option>
@@ -146,10 +174,11 @@
         </select>
 
         <label for="industry">Business Industry</label>
-        <input type="text" id="industry" name="industry" required>
+        <input type="text" name="industry" id="industry" required />
 
         <label for="timezone">Your Timezone</label>
-        <select id="timezone" name="timezone" required>
+        <select name="timezone" id="timezone" required>
+          <option value="">Select your timezone</option>
           <option value="pst">Pacific Standard Time (PST)</option>
           <option value="mst">Mountain Standard Time (MST)</option>
           <option value="cst">Central Standard Time (CST)</option>
@@ -159,16 +188,46 @@
           <option value="aest">Australian Eastern Standard Time (AEST)</option>
         </select>
 
-        <label for="message">Additional Details or Questions</label>
-        <textarea id="message" name="message" rows="4"></textarea>
+        <label for="message">Additional Details</label>
+        <textarea name="message" id="message" rows="4"></textarea>
 
         <button type="submit">Submit</button>
+        <div id="successMessage">Thank you! We'll be in touch soon.</div>
       </form>
     </div>
-  </section>
+  </div>
 
-  <footer>
-    <p>&copy; 2025 Whisperwind Workspace. All rights reserved.</p>
-  </footer>
+  <script>
+    document.querySelector('.cta-button').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('quoteModal').style.display = 'block';
+    });
+
+    function closeModal() {
+      document.getElementById('quoteModal').style.display = 'none';
+    }
+
+    document.getElementById('quoteForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = new FormData(form);
+      fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(response => {
+        if (response.ok) {
+          document.getElementById('successMessage').style.display = 'block';
+          form.reset();
+        } else {
+          alert("There was a problem submitting the form.");
+        }
+      }).catch(error => {
+        alert("Something went wrong. Please try again later.");
+      });
+    });
+  </script>
 </body>
 </html>
