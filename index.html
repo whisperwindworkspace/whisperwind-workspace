@@ -118,6 +118,7 @@
       max-width: 500px;
       width: 90%;
       animation: modalEntrance 0.5s ease-out;
+      position: relative;
     }
 
     @keyframes modalEntrance {
@@ -261,16 +262,10 @@
           <option>MST</option>
           <option>CST</option>
           <option>EST</option>
-          <option>GMT</option>
-          <option>IST</option>
-          <option>AEST</option>
         </select>
 
-        <label for="message">Additional Details</label>
-        <textarea name="message" id="message" placeholder="Additional Details" rows="4"></textarea>
-
-        <button type="submit">Submit</button>
-        <div id="successMessage">Thank you! We'll be in touch soon.</div>
+        <button type="submit" class="cta-button">Submit</button>
+        <p id="successMessage">Your quote request has been submitted! We'll get back to you soon.</p>
       </form>
     </div>
   </div>
@@ -279,22 +274,44 @@
     <p>&copy; 2025 Whisperwind Workspace. All rights reserved.</p>
   </footer>
 
-  <!-- Calming background audio -->
-  <audio id="bgAudio" controls autoplay loop>
-    <source src="calming_breeze.mp3" type="audio/mp3">
-    Your browser does not support the audio element.
+  <audio id="bgAudio" loop>
+    <source src="audio/nature-sounds.mp3" type="audio/mpeg">
   </audio>
 
   <script>
-    // Open modal
+    // Open the modal
     function openModal() {
-      document.getElementById('quoteModal').style.display = 'flex';
+      document.getElementById("quoteModal").style.display = "flex";
+      document.getElementById("bgAudio").play();
     }
 
-    // Close modal
+    // Close the modal
     function closeModal() {
-      document.getElementById('quoteModal').style.display = 'none';
+      document.getElementById("quoteModal").style.display = "none";
+      document.getElementById("bgAudio").pause();
     }
+
+    // Form validation and success message display
+    const form = document.getElementById("quoteForm");
+    const successMessage = document.getElementById("successMessage");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name");
+      const email = document.getElementById("email");
+      const phone = document.getElementById("phone");
+      const timezone = document.getElementById("timezone");
+
+      // Check if required fields are filled
+      if (name.value === "" || email.value === "" || phone.value === "" || timezone.value === "") {
+        alert("Please fill out all required fields.");
+      } else {
+        // Submit form and show success message
+        form.submit();
+        successMessage.style.display = "block";
+      }
+    });
   </script>
 </body>
 </html>
