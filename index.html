@@ -88,7 +88,7 @@
       content: ' *';
       color: red;
     }
-    input, select {
+    input, select, textarea {
       width: 100%;
       padding: 0.5rem;
       margin-top: 0.25rem;
@@ -138,22 +138,6 @@
       .feather-icon { display: none; }
     }
   </style>
-
-  <!-- Schema Markup for SEO -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Whisperwind Workspace",
-    "url": "https://yourdomain.github.io/",
-    "logo": "https://yourdomain.github.io/logo.png",
-    "email": "mailto:whisperwindworkspace@gmail.com",
-    "sameAs": [
-      "https://www.instagram.com/yourpage",
-      "https://www.linkedin.com/company/yourpage"
-    ]
-  }
-  </script>
 </head>
 <body>
   <div class="feather-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Feather_icon.svg" width="40" /></div>
@@ -246,14 +230,8 @@
           <option value="Pacific/Noumea">New Caledonia Time (UTC+11:00)</option>
           <option value="Pacific/Fiji">Fiji Time (UTC+12:00)</option>
         </select>
-        <label class="required">Move Details</label>
-        <input type="text" name="move_details" required>
-        <label>Household Inventory</label>
-        <textarea name="inventory"></textarea>
-        <label>Storage Plan</label>
-        <textarea name="storage_plan"></textarea>
-        <label>Request</label>
-        <textarea name="request"></textarea>
+        <label for="additionalDetails">Additional Details (Optional)</label>
+        <textarea id="additionalDetails" name="additionalDetails" rows="4" maxlength="1000" placeholder="Provide any other information here..."></textarea>
         <button type="submit" class="cta-button">Submit</button>
       </form>
     </div>
