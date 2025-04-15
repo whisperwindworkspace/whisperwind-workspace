@@ -180,6 +180,11 @@
       margin: 0;
       font-size: 1em;
     }
+    .disclaimer {
+      font-size: 0.9em;
+      color: #888;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
@@ -217,12 +222,7 @@
 
   <section id="pricing">
     <h2>Pricing</h2>
-    <ul>
-      <li><strong>Starter VA Support</strong> - Ideal for solo entrepreneurs</li>
-      <li><strong>Full Admin Suite</strong> - Perfect for growing teams</li>
-      <li><strong>Custom Quote</strong> - Tailored support for unique needs</li>
-    </ul>
-    <a href="#" class="cta-button" onclick="document.getElementById('quoteModal').style.display='flex'">Get a Quote</a>
+    <p><a href="#" class="cta-button" onclick="document.getElementById('quoteModal').style.display='flex'">Get a Quote</a></p>
   </section>
 
   <section id="contact">
@@ -235,12 +235,12 @@
     <p>&copy; 2025 Whisperwind Workspace. All rights reserved.</p>
   </footer>
 
-  <!-- Modal -->
+  <!-- Modal for Pricing Calculator -->
   <div id="quoteModal" class="modal">
     <div class="modal-content">
       <button class="close-btn" onclick="document.getElementById('quoteModal').style.display='none'">&times;</button>
       <h2>Request a Quote</h2>
-      <form action="https://formspree.io/f/mkgjevkn" method="POST" onsubmit="return validateForm()">
+      <form id="quoteForm" onsubmit="return validateForm()">
         <label class="required">Name</label>
         <input type="text" name="name" required>
         <label class="required">Email</label>
@@ -262,6 +262,7 @@
         <input type="text" name="industry">
         <button type="submit" class="cta-button">Submit</button>
       </form>
+      <p class="disclaimer">*Note: The price is an estimate and is not final until the contract is signed.</p>
     </div>
   </div>
 
@@ -271,28 +272,6 @@
   </audio>
   <button id="audioToggle" onclick="toggleAudio()">🎵</button>
 
-  <!-- VA Pricing Section -->
-  <section id="va-pricing">
-    <div class="container">
-      <h2>Virtual Assistant Pricing Calculator</h2>
-
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
-        <div class="form-group">
-          <label for="hours">Hours per Week:</label>
-          <input type="number" id="hours" min="0" max="40" placeholder="Enter hours per week">
-        </div>
-        <div class="form-group">
-          <label for="tasks">Tasks per Week:</label>
-          <input type="number" id="tasks" min="0" placeholder="Enter tasks per week">
-        </div>
-      </div>
-
-      <button id="calculate" onclick="calculateVA()">Calculate Price</button>
-
-      <div id="output"></div>
-    </div>
-  </section>
-
   <script>
     // Modal Handling
     window.onclick = function(event) {
@@ -300,6 +279,7 @@
         document.getElementById('quoteModal').style.display = "none";
       }
     }
+    
     // Form Validation
     function validateForm() {
       let isValid = true;
@@ -325,19 +305,6 @@
         bgAudio.play();
       }
       audioPlaying = !audioPlaying;
-    }
-
-    // Pricing Calculator
-    function calculateVA() {
-      const hours = parseInt(document.getElementById('hours').value);
-      const tasks = parseInt(document.getElementById('tasks').value);
-      let price = 0;
-      if (hours > 0 || tasks > 0) {
-        price = (hours * 15) + (tasks * 5);
-        document.getElementById('output').innerHTML = `<p>Total estimated price: $${price}</p>`;
-      } else {
-        document.getElementById('output').innerHTML = "<p>Please enter valid hours or tasks.</p>";
-      }
     }
   </script>
 </body>
