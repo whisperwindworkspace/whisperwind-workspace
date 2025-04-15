@@ -3,29 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Whisperwind Workspace offers virtual assistant services tailored to your business needs. Let us handle the details while you grow your business." />
+  <meta name="description" content="Whisperwind Workspace provides virtual assistant services with a breeze. We offer executive assistance, customer support, data entry, and more." />
+  <meta name="keywords" content="Virtual Assistant, Executive Assistance, Project Coordination, Business Support, Remote Services" />
   <meta name="author" content="Whisperwind Workspace" />
-  <meta name="keywords" content="virtual assistant, VA services, remote support, business growth, executive assistant, customer service" />
-  <title>Whisperwind Workspace - Virtual Support for Your Business</title>
+  <title>Whisperwind Workspace</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-    /* General Styles */
     body {
       font-family: 'Inter', sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f0f8ff; /* Light blue */
+      background-color: #e0f7fa;
       color: #333;
-      transition: background-color 0.3s ease;
+      position: relative;
       overflow-x: hidden;
     }
 
     header {
-      background-color: #a2d9c7; /* Breeze green */
+      background-color: #388e3c;
       color: white;
       padding: 2rem;
       text-align: center;
-      font-size: 2.5rem;
     }
 
     nav a {
@@ -42,8 +40,7 @@
     }
 
     h2 {
-      color: #a2d9c7; /* Breeze green */
-      font-size: 2.5rem;
+      color: #388e3c;
     }
 
     footer {
@@ -56,65 +53,102 @@
       display: inline-block;
       margin-top: 1rem;
       padding: 0.75rem 1.5rem;
-      background-color: #a2d9c7; /* Breeze green */
+      background-color: #388e3c;
       color: white;
       text-decoration: none;
       border-radius: 8px;
     }
 
-    /* Modal Styles */
-    .modal {
+    .required {
+      color: red;
+      font-weight: bold;
+    }
+
+    input:invalid, select:invalid, textarea:invalid {
+      border: 2px solid red;
+      background-color: #fdd;
+    }
+
+    input:invalid:focus, select:invalid:focus, textarea:invalid:focus {
+      outline: none;
+      box-shadow: 0 0 5px red;
+    }
+
+    input, select, textarea {
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      width: 100%;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #388e3c;
+      outline: none;
+    }
+
+    #successMessage {
+      display: none;
+      color: green;
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    /* Modal container */
+    #quoteModal {
       display: none;
       position: fixed;
-      z-index: 1;
-      left: 0;
       top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.4);
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: 1000;
       justify-content: center;
       align-items: center;
     }
 
+    /* Modal content */
     .modal-content {
       background-color: white;
-      padding: 20px;
+      padding: 2rem;
       border-radius: 8px;
-      width: 70%;
-      max-width: 600px;
-      animation: modal-entrance 0.3s ease;
+      max-width: 500px;
+      width: 90%;
+      animation: modalEntrance 0.5s ease-out;
+      position: relative;
     }
 
-    @keyframes modal-entrance {
-      from {
-        transform: scale(0.7);
-        opacity: 0;
-      }
-      to {
-        transform: scale(1);
-        opacity: 1;
-      }
+    @keyframes modalEntrance {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
     }
 
-    .modal-close {
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      color: #333;
+    /* Close button for modal */
+    .close-btn {
       position: absolute;
       top: 10px;
       right: 10px;
+      font-size: 1.5rem;
+      color: #388e3c;
+      background: none;
+      border: none;
       cursor: pointer;
     }
 
-    /* Floating Leaf Animation */
+    .close-btn:hover {
+      color: red;
+    }
+
+    /* Floating leaves animation */
     .leaf {
       position: absolute;
       width: 40px;
       height: 40px;
-      background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/7c/Feather_example.svg'); /* Light feather */
-      background-size: contain;
-      background-repeat: no-repeat;
+      background-color: #81c784; /* Leaf Green Color */
+      clip-path: ellipse(50% 60% at 50% 50%); /* Elliptical shape for a leaf */
       opacity: 0.8;
       animation: float 10s infinite ease-in-out;
     }
@@ -125,61 +159,28 @@
       100% { transform: translateY(0) rotate(360deg); opacity: 0.8; }
     }
 
-    /* Floating Leaf Positioning */
+    /* Leaf positioning */
     .leaf:nth-child(1) { top: 10%; left: 5%; animation-duration: 12s; }
     .leaf:nth-child(2) { top: 20%; left: 25%; animation-duration: 14s; }
     .leaf:nth-child(3) { top: 30%; left: 45%; animation-duration: 16s; }
     .leaf:nth-child(4) { top: 40%; left: 65%; animation-duration: 18s; }
     .leaf:nth-child(5) { top: 50%; left: 85%; animation-duration: 20s; }
 
-    /* Audio Toggle Styles */
-    #audioToggle {
-      background: none;
-      border: none;
-      position: fixed;
-      bottom: 10px;
-      right: 10px;
-      z-index: 999;
-      cursor: pointer;
+    /* Calming background audio */
+    #bgAudio {
+      display: none;
     }
 
-    /* Tooltip Styling */
-    .tooltip {
-      visibility: hidden;
-      background-color: #555;
-      color: #fff;
-      text-align: center;
-      border-radius: 5px;
-      padding: 5px;
-      position: absolute;
-      bottom: 25px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1;
-    }
-
-    #audioToggle:hover .tooltip {
-      visibility: visible;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      header {
-        font-size: 2rem;
-      }
-
-      section {
-        padding: 2rem 1rem;
-      }
-
-      .modal-content {
-        width: 90%;
-      }
-    }
   </style>
 </head>
 <body>
-  <!-- Header Section -->
+  <!-- Floating leaves -->
+  <div class="leaf"></div>
+  <div class="leaf"></div>
+  <div class="leaf"></div>
+  <div class="leaf"></div>
+  <div class="leaf"></div>
+
   <header>
     <h1>Whisperwind Workspace</h1>
     <p>Where Virtual Support Meets Real Results</p>
@@ -191,13 +192,11 @@
     </nav>
   </header>
 
-  <!-- About Section -->
   <section id="about">
     <h2>About Us</h2>
     <p>Whisperwind Workspace was founded to provide dependable, professional, and intuitive virtual support tailored to your business needs. Our mission is to simplify your workload so you can focus on what matters most—growing your business.</p>
   </section>
 
-  <!-- Services Section -->
   <section id="services">
     <h2>Our Services</h2>
     <ul>
@@ -210,92 +209,109 @@
     </ul>
   </section>
 
-  <!-- Pricing Section -->
   <section id="pricing">
     <h2>Pricing</h2>
-    <p>We offer flexible packages to fit your business needs:</p>
+    <p>We offer flexible packages to fit your business needs.</p>
     <ul>
-      <li><strong>Starter VA Support</strong> - $400/month</li>
-      <li><strong>Full Admin Suite</strong> - $800/month</li>
+      <li><strong>Starter VA Support</strong> - Ideal for solo entrepreneurs</li>
+      <li><strong>Full Admin Suite</strong> - Perfect for growing teams</li>
       <li><strong>Custom Quote</strong> - Tailored support for unique needs</li>
     </ul>
-    <a href="#contact" class="cta-button" onclick="showModal()">Get a Quote</a>
+    <a href="javascript:void(0);" class="cta-button" onclick="openModal()">Get a Quote</a>
   </section>
 
-  <!-- Contact Section -->
   <section id="contact">
     <h2>Contact Us</h2>
     <p>Email us at <a href="mailto:whisperwindworkspace@gmail.com">whisperwindworkspace@gmail.com</a></p>
+    <p>Follow us on social media for updates and insights.</p>
   </section>
 
   <!-- Modal for Quote Form -->
-  <div class="modal" id="quoteModal">
+  <div id="quoteModal">
     <div class="modal-content">
-      <button class="modal-close" onclick="closeModal()">X</button>
-      <h3>Get a Quote</h3>
-      <form action="https://formspree.io/f/mkgjevkn" method="POST" id="quoteForm">
-        <label for="name">Name (Required)</label>
-        <input type="text" id="name" name="name" required><br><br>
+      <button class="close-btn" onclick="closeModal()">&times;</button>
+      <h2>Get a Quote</h2>
+      <form id="quoteForm" action="https://formspree.io/f/mkgjevkn" method="POST">
+        <label for="name">Your Name <span class="required">*</span></label>
+        <input type="text" name="name" id="name" placeholder="Your Name *" required />
 
-        <label for="email">Email (Required)</label>
-        <input type="email" id="email" name="email" required><br><br>
+        <label for="email">Your Email <span class="required">*</span></label>
+        <input type="email" name="email" id="email" placeholder="Your Email *" required />
 
-        <label for="phone">Phone</label>
-        <input type="text" id="phone" name="phone"><br><br>
+        <label for="phone">Phone Number <span class="required">*</span></label>
+        <input type="tel" name="phone" id="phone" placeholder="Phone Number *" required />
 
-        <label for="timezone">Timezone (Required)</label>
-        <input type="text" id="timezone" name="timezone" required><br><br>
+        <label for="va-type">Type of VA Needed</label>
+        <select name="va-type" id="va-type">
+          <option value="">Select</option>
+          <option>Executive Assistant</option>
+          <option>Inbox & Calendar Management</option>
+          <option>Customer Support</option>
+          <option>Data Entry & Reporting</option>
+          <option>Project Coordination</option>
+          <option>Custom VA Package</option>
+        </select>
 
-        <label for="services">Services Needed (Required)</label><br>
-        <textarea id="services" name="services" rows="4" required></textarea><br><br>
+        <label for="industry">Business Industry</label>
+        <input type="text" name="industry" id="industry" placeholder="Business Industry" />
 
-        <input type="submit" value="Submit">
+        <label for="timezone">Timezone <span class="required">*</span></label>
+        <select name="timezone" id="timezone" required>
+          <option value="">Your Timezone *</option>
+          <option>PST</option>
+          <option>MST</option>
+          <option>CST</option>
+          <option>EST</option>
+        </select>
+
+        <button type="submit" class="cta-button">Submit</button>
+        <p id="successMessage">Your quote request has been submitted! We'll get back to you soon.</p>
       </form>
     </div>
   </div>
 
-  <!-- Audio Toggle -->
-  <button id="audioToggle" onclick="toggleAudio()">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Volume_up_icon_2013.png" alt="audio icon" style="width: 30px;">
-    <span class="tooltip">Click to toggle background sound</span>
-  </button>
+  <footer>
+    <p>&copy; 2025 Whisperwind Workspace. All rights reserved.</p>
+  </footer>
 
-  <!-- Floating Leaf Animations -->
-  <div class="leaf"></div>
-  <div class="leaf"></div>
-  <div class="leaf"></div>
-  <div class="leaf"></div>
-  <div class="leaf"></div>
-
-  <!-- Background Audio -->
-  <audio id="backgroundAudio" loop autoplay>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
+  <audio id="bgAudio" loop>
+    <source src="audio/nature-sounds.mp3" type="audio/mpeg">
   </audio>
 
   <script>
-    let audioPlaying = true;
-
-    function toggleAudio() {
-      const audio = document.getElementById('backgroundAudio');
-      const tooltip = document.querySelector('.tooltip');
-      if (audioPlaying) {
-        audio.pause();
-        tooltip.textContent = 'Click to unmute';
-      } else {
-        audio.play();
-        tooltip.textContent = 'Click to mute';
-      }
-      audioPlaying = !audioPlaying;
+    // Open the modal
+    function openModal() {
+      document.getElementById("quoteModal").style.display = "flex";
+      document.getElementById("bgAudio").play();
     }
 
-    function showModal() {
-      document.getElementById('quoteModal').style.display = 'flex';
-    }
-
+    // Close the modal
     function closeModal() {
-      document.getElementById('quoteModal').style.display = 'none';
+      document.getElementById("quoteModal").style.display = "none";
+      document.getElementById("bgAudio").pause();
     }
+
+    // Form validation and success message display
+    const form = document.getElementById("quoteForm");
+    const successMessage = document.getElementById("successMessage");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name");
+      const email = document.getElementById("email");
+      const phone = document.getElementById("phone");
+      const timezone = document.getElementById("timezone");
+
+      // Check if required fields are filled
+      if (name.value === "" || email.value === "" || phone.value === "" || timezone.value === "") {
+        alert("Please fill out all required fields.");
+      } else {
+        // Submit form and show success message
+        form.submit();
+        successMessage.style.display = "block";
+      }
+    });
   </script>
 </body>
 </html>
