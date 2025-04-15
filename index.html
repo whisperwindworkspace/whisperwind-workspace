@@ -9,6 +9,7 @@
   <title>Whisperwind Workspace</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
+    /* General body and header styles */
     body {
       font-family: 'Inter', sans-serif;
       margin: 0;
@@ -142,13 +143,14 @@
       color: red;
     }
 
-    /* Floating leaves animation */
+    /* Realistic leaf animation */
     .leaf {
       position: absolute;
       width: 40px;
       height: 40px;
-      background-color: #81c784; /* Leaf Green Color */
-      clip-path: ellipse(50% 60% at 50% 50%); /* Elliptical shape for a leaf */
+      background-image: url('https://upload.wikimedia.org/wikipedia/commons/3/3a/Maple_Leaf.svg'); /* Example leaf SVG */
+      background-size: contain;
+      background-repeat: no-repeat;
       opacity: 0.8;
       animation: float 10s infinite ease-in-out;
     }
