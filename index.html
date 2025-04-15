@@ -17,7 +17,7 @@
       background-color: #e0f7fa;
       color: #333;
       position: relative;
-      overflow-x: hidden;
+      overflow: hidden; /* Ensure leaves don't overflow off screen */
     }
 
     header {
@@ -153,6 +153,7 @@
       background-repeat: no-repeat;
       opacity: 0.8;
       animation: float 10s infinite ease-in-out;
+      z-index: 10;
     }
 
     @keyframes float {
@@ -251,46 +252,47 @@
           <option>Customer Support</option>
           <option>Data Entry & Reporting</option>
           <option>Project Coordination</option>
-          <option>Custom VA Package</option>
+          <option>Other</option>
         </select>
 
-        <label for="industry">Business Industry</label>
-        <input type="text" name="industry" id="industry" placeholder="Business Industry" />
-
-        <label for="timezone">Timezone <span class="required">*</span></label>
+        <label for="timezone">Your Timezone <span class="required">*</span></label>
         <select name="timezone" id="timezone" required>
-          <option value="">Your Timezone *</option>
-          <option>PST</option>
-          <option>MST</option>
-          <option>CST</option>
-          <option>EST</option>
+          <option value="">Select Timezone</option>
+          <option value="PST">PST</option>
+          <option value="MST">MST</option>
+          <option value="CST">CST</option>
+          <option value="EST">EST</option>
+          <!-- Add more timezones if needed -->
         </select>
 
-        <button type="submit" class="cta-button">Submit</button>
-        <p id="successMessage">Your quote request has been submitted! We'll get back to you soon.</p>
+        <button type="submit">Submit</button>
       </form>
+      <div id="successMessage">Thank you for your request! We'll get back to you soon.</div>
     </div>
   </div>
 
-  <footer>
-    <p>&copy; 2025 Whisperwind Workspace. All rights reserved.</p>
-  </footer>
-
   <audio id="bgAudio" loop>
-    <source src="audio/nature-sounds.mp3" type="audio/mpeg">
+    <source src="your_audio_file.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
   </audio>
 
   <script>
-    // Open the modal
+    // Leaf floating animation
+    window.addEventListener("load", function() {
+      let leaves = document.querySelectorAll('.leaf');
+      leaves.forEach(leaf => {
+        leaf.style.animationDuration = `${Math.random() * 10 + 10}s`; // Randomize animation speed
+        leaf.style.left = `${Math.random() * 100}%`; // Randomize horizontal position
+      });
+    });
+
+    // Modal Open and Close
     function openModal() {
       document.getElementById("quoteModal").style.display = "flex";
-      document.getElementById("bgAudio").play();
     }
 
-    // Close the modal
     function closeModal() {
       document.getElementById("quoteModal").style.display = "none";
-      document.getElementById("bgAudio").pause();
     }
 
     // Form submission success
