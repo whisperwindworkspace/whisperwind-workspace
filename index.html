@@ -17,6 +17,7 @@
       background-color: #f0f8ff; /* Light blue */
       color: #333;
       transition: background-color 0.3s ease;
+      overflow-x: hidden;
     }
 
     header {
@@ -243,39 +244,23 @@
         <input type="text" id="phone" name="phone"><br><br>
 
         <label for="timezone">Timezone (Required)</label>
-        <select id="timezone" name="timezone" required>
-          <option value="">Select Timezone</option>
-          <option value="EST">Eastern Standard Time</option>
-          <option value="CST">Central Standard Time</option>
-          <option value="PST">Pacific Standard Time</option>
-        </select><br><br>
+        <input type="text" id="timezone" name="timezone" required><br><br>
 
-        <label for="service">Type of VA (Required)</label>
-        <select id="service" name="service" required>
-          <option value="">Select VA Service</option>
-          <option value="Executive Assistant">Executive Assistant</option>
-          <option value="Inbox Management">Inbox Management</option>
-          <option value="Customer Support">Customer Support</option>
-          <option value="Project Coordination">Project Coordination</option>
-        </select><br><br>
+        <label for="services">Services Needed (Required)</label><br>
+        <textarea id="services" name="services" rows="4" required></textarea><br><br>
 
         <input type="submit" value="Submit">
       </form>
     </div>
   </div>
 
-  <!-- Footer Section -->
-  <footer>
-    <p>&copy; 2025 Whisperwind Workspace. All rights reserved.</p>
-  </footer>
-
-  <!-- Audio Toggle Button -->
-  <button id="audioToggle">
-    <img src="audio-on-icon.svg" alt="Audio Icon" id="audioIcon" />
-    <div class="tooltip">Mute/Unmute Audio</div>
+  <!-- Audio Toggle -->
+  <button id="audioToggle" onclick="toggleAudio()">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Volume_up_icon_2013.png" alt="audio icon" style="width: 30px;">
+    <span class="tooltip">Click to toggle background sound</span>
   </button>
 
-  <!-- Floating Leaves -->
+  <!-- Floating Leaf Animations -->
   <div class="leaf"></div>
   <div class="leaf"></div>
   <div class="leaf"></div>
@@ -283,36 +268,34 @@
   <div class="leaf"></div>
 
   <!-- Background Audio -->
-  <audio id="backgroundAudio" loop>
-    <source src="your-breeze-audio.mp3" type="audio/mp3">
+  <audio id="backgroundAudio" loop autoplay>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
   </audio>
 
   <script>
-    // Modal Show & Hide
+    let audioPlaying = true;
+
+    function toggleAudio() {
+      const audio = document.getElementById('backgroundAudio');
+      const tooltip = document.querySelector('.tooltip');
+      if (audioPlaying) {
+        audio.pause();
+        tooltip.textContent = 'Click to unmute';
+      } else {
+        audio.play();
+        tooltip.textContent = 'Click to mute';
+      }
+      audioPlaying = !audioPlaying;
+    }
+
     function showModal() {
-      document.getElementById("quoteModal").style.display = "flex";
+      document.getElementById('quoteModal').style.display = 'flex';
     }
 
     function closeModal() {
-      document.getElementById("quoteModal").style.display = "none";
+      document.getElementById('quoteModal').style.display = 'none';
     }
-
-    // Background Audio Toggle
-    const audio = document.getElementById("backgroundAudio");
-    const audioToggle = document.getElementById("audioToggle");
-    const audioIcon = document.getElementById("audioIcon");
-
-    audio.play();
-
-    audioToggle.addEventListener("click", function() {
-      if (audio.paused) {
-        audio.play();
-        audioIcon.src = "audio-on-icon.svg";
-      } else {
-        audio.pause();
-        audioIcon.src = "audio-off-icon.svg";
-      }
-    });
   </script>
 </body>
 </html>
