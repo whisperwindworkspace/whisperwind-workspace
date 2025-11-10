@@ -6,55 +6,276 @@
   <title>Whisperwind Workspace</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg: #F4F9F9;
+      --accent: #5DA9A7;
+      --accent-soft: #B8D8D8;
+      --text-main: #4B636E;
+      --text-muted: #6B7A85;
+      --card-bg: #FFFFFF;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: 'Inter', sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #F4F9F9;
-      color: #4B636E;
+      background-color: var(--bg);
+      color: var(--text-main);
       background-image: url('https://www.transparenttextures.com/patterns/white-feathers.png');
     }
-    header {
-      background-color: #B8D8D8;
-      color: #4B636E;
-      padding: 2rem;
-      text-align: center;
-      position: relative;
+
+    /* Layout helpers */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 2rem;
     }
+
+    header {
+      background-color: var(--accent-soft);
+      color: var(--text-main);
+      padding: 1.75rem 0 1.5rem;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      letter-spacing: 0.03em;
+    }
+
     header p {
       font-family: 'Great Vibes', cursive;
-      font-size: 1.5rem;
+      font-size: 1.7rem;
+      margin: 0.4rem 0 1rem;
+    }
+
+    nav {
       margin-top: 0.5rem;
     }
+
     nav a {
-      margin: 0 1rem;
-      color: #4B636E;
+      margin: 0 0.75rem;
+      color: var(--text-main);
       text-decoration: none;
       font-weight: 600;
+      font-size: 0.95rem;
+      position: relative;
     }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -0.25rem;
+      width: 0;
+      height: 2px;
+      background-color: var(--accent);
+      transition: width 0.2s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
     section {
-      padding: 4rem 2rem;
-      max-width: 1000px;
-      margin: auto;
+      padding: 4rem 0;
     }
+
     h2 {
-      color: #5DA9A7;
+      color: var(--accent);
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      font-size: 1.7rem;
     }
+
+    .section-subtitle {
+      margin: 0 0 2rem;
+      color: var(--text-muted);
+      max-width: 640px;
+    }
+
     footer {
       text-align: center;
       padding: 2rem;
       background-color: #DFF5F2;
-      color: #4B636E;
+      color: var(--text-main);
+      margin-top: 2rem;
+      font-size: 0.9rem;
     }
+
+    ul {
+      padding-left: 1.2rem;
+    }
+
     .cta-button {
       display: inline-block;
-      margin-top: 1rem;
+      margin-top: 1.5rem;
       padding: 0.75rem 1.5rem;
-      background-color: #5DA9A7;
+      background-color: var(--accent);
       color: white;
       text-decoration: none;
-      border-radius: 8px;
+      border-radius: 999px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+      transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        background-color 0.15s ease;
     }
+
+    .cta-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
+      background-color: #4c918f;
+    }
+
+    .cta-button:active {
+      transform: translateY(0);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.16);
+    }
+
+    /* Soft sections */
+    .section-soft {
+      background-color: rgba(184, 216, 216, 0.18);
+      border-top: 1px solid rgba(184, 216, 216, 0.4);
+      border-bottom: 1px solid rgba(184, 216, 216, 0.4);
+    }
+
+    /* Why Choose Us */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 1.25rem 1.4rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(184, 216, 216, 0.6);
+    }
+
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background-color: rgba(93, 169, 167, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-card h3 {
+      margin: 0 0 0.4rem;
+      font-size: 1.1rem;
+    }
+
+    .feature-card p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Testimonials */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    .testimonial-card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 1.5rem 1.4rem 1.4rem;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.06);
+      border: 1px solid rgba(184, 216, 216, 0.6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .testimonial-card::before {
+      content: '“';
+      position: absolute;
+      font-size: 3rem;
+      color: rgba(93, 169, 167, 0.16);
+      top: 0.3rem;
+      left: 0.7rem;
+    }
+
+    .testimonial-card blockquote {
+      margin: 0 0 1rem;
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+
+    .testimonial-name {
+      font-weight: 600;
+      display: block;
+      font-size: 0.95rem;
+    }
+
+    .testimonial-role {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* FAQ */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .faq-item {
+      background: var(--card-bg);
+      border-radius: 10px;
+      border: 1px solid rgba(184, 216, 216, 0.8);
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      text-align: left;
+      background: transparent;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--text-main);
+      cursor: pointer;
+    }
+
+    .faq-icon {
+      margin-left: 1rem;
+      font-size: 1.2rem;
+      color: var(--accent);
+    }
+
+    .faq-answer {
+      padding: 0 1rem 0.9rem;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    /* Modal */
     .modal {
       display: none;
       position: fixed;
@@ -65,6 +286,7 @@
       justify-content: center;
       align-items: center;
     }
+
     .modal-content {
       background-color: #fff;
       padding: 2rem;
@@ -72,8 +294,9 @@
       max-width: 500px;
       width: 90%;
       position: relative;
-      animation: fadeIn 0.5s ease;
+      animation: fadeIn 0.4s ease;
     }
+
     .close-btn {
       position: absolute;
       top: 10px;
@@ -82,128 +305,441 @@
       border: none;
       font-size: 20px;
       cursor: pointer;
-      color: #5DA9A7;
+      color: var(--accent);
     }
+
     label.required::after {
       content: ' *';
       color: red;
     }
+
     input, select, textarea {
       width: 100%;
       padding: 0.5rem;
       margin-top: 0.25rem;
+      margin-bottom: 0.85rem;
       border-radius: 5px;
       border: 1px solid #ccc;
+      font-family: inherit;
+      font-size: 0.95rem;
     }
+
+    textarea {
+      resize: vertical;
+    }
+
     .error {
       border-color: red !important;
     }
+
     @keyframes fadeIn {
       from { transform: scale(0.95); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
     }
+
+    /* Back to top button */
+    #backToTop {
+      position: fixed;
+      right: 1.5rem;
+      bottom: 1.5rem;
+      background-color: var(--text-main);
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      width: 2.8rem;
+      height: 2.8rem;
+      font-size: 1.3rem;
+      cursor: pointer;
+      z-index: 1100;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+      transition:
+        opacity 0.25s ease,
+        transform 0.25s ease,
+        background-color 0.2s ease;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    #backToTop.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    #backToTop:hover {
+      background-color: #374852;
+    }
+
+    /* Audio toggle */
     #audioToggle {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #5DA9A7;
-      color: white;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      background-color: #fdfdfc;
+      color: var(--text-main);
       border: none;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      font-size: 24px;
+      border-radius: 999px;
+      width: 2.8rem;
+      height: 2.8rem;
+      font-size: 1.35rem;
       cursor: pointer;
-      z-index: 1000;
+      z-index: 1100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      transition:
+        background-color 0.2s ease,
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
     }
+
+    #audioToggle:hover {
+      background-color: #f3fbfb;
+      transform: translateY(-1px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
+    }
+
+    /* Floating feathers */
     .feather-icon {
       position: absolute;
       width: 40px;
       opacity: 0.3;
       animation: drift 12s infinite ease-in-out;
+      pointer-events: none;
     }
-    .feather-icon:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
-    .feather-icon:nth-child(2) { top: 30%; left: 80%; animation-delay: 4s; }
-    .feather-icon:nth-child(3) { top: 50%; left: 20%; animation-delay: 2s; }
+
+    .feather-icon img {
+      width: 40px;
+      height: auto;
+    }
+
+    .feather-icon:nth-of-type(1) { top: 10%; left: 10%; animation-delay: 0s; }
+    .feather-icon:nth-of-type(2) { top: 30%; left: 80%; animation-delay: 4s; }
+    .feather-icon:nth-of-type(3) { top: 55%; left: 20%; animation-delay: 2s; }
+
     @keyframes drift {
       0% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(40px) rotate(15deg); }
+      50% { transform: translateY(40px) rotate(12deg); }
       100% { transform: translateY(0) rotate(0deg); }
     }
-    @media (max-width: 768px) {
-      nav a {
-        display: block;
-        margin: 0.5rem 0;
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .testimonials-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 1.25rem;
+      }
+
+      nav a {
+        display: inline-block;
+        margin: 0.25rem 0.4rem;
+      }
+
       .feather-icon { display: none; }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 3rem 0;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="feather-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Feather_icon.svg" width="40" /></div>
-  <div class="feather-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Feather_icon.svg" width="40" /></div>
-  <div class="feather-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Feather_icon.svg" width="40" /></div>
+  <!-- Floating feathers -->
+  <div class="feather-icon">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Feather_icon.svg"
+         alt=""
+         loading="lazy"
+         aria-hidden="true">
+  </div>
+  <div class="feather-icon">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Feather_icon.svg"
+         alt=""
+         loading="lazy"
+         aria-hidden="true">
+  </div>
+  <div class="feather-icon">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Feather_icon.svg"
+         alt=""
+         loading="lazy"
+         aria-hidden="true">
+  </div>
+
+  <!-- Background audio -->
+  <audio id="bgAudio" src="path_to_your_audio_file.mp3" loop muted></audio>
 
   <header>
-    <h1>Whisperwind Workspace</h1>
-    <p>Where Virtual Support Meets Real Results</p>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <div class="container">
+      <h1>Whisperwind Workspace</h1>
+      <p>Where Virtual Support Meets Real Results</p>
+      <nav aria-label="Primary navigation">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#why-choose-us">Why Us</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
   </header>
 
-  <section id="about">
-    <h2>About Us</h2>
-    <p>Whisperwind Workspace provides dependable, intuitive virtual support tailored to your business needs. Let us simplify your workload so you can grow your business.</p>
-  </section>
+  <main>
+    <section id="about">
+      <div class="container">
+        <h2>About Us</h2>
+        <p class="section-subtitle">
+          Whisperwind Workspace provides dependable, intuitive virtual support tailored to your business needs.
+          We focus on calm, consistent operations so you can focus on strategy, creativity, and growth.
+        </p>
+        <p>
+          Whether you're a solo entrepreneur or leading a small team, having a quiet, reliable support partner
+          makes it easier to stay present with the work that matters most.
+        </p>
+      </div>
+    </section>
 
-  <section id="services">
-    <h2>Our Services</h2>
-    <ul>
-      <li>Executive Assistance</li>
-      <li>Inbox & Calendar Management</li>
-      <li>Customer Support</li>
-      <li>Data Entry & Reporting</li>
-      <li>Project Coordination</li>
-      <li>Custom VA Packages</li>
-    </ul>
-  </section>
+    <section id="services" class="section-soft">
+      <div class="container">
+        <h2>Our Services</h2>
+        <p class="section-subtitle">
+          Gentle, highly organized support behind the scenes, tailored to the rhythm of your business.
+        </p>
+        <ul>
+          <li>Executive Assistance & admin support</li>
+          <li>Inbox & calendar management</li>
+          <li>Client & customer support follow-ups</li>
+          <li>Data entry, light reporting & documentation</li>
+          <li>Project coordination & task tracking</li>
+          <li>Custom VA packages for unique workflows</li>
+        </ul>
+      </div>
+    </section>
 
-  <section id="pricing">
-    <h2>Pricing</h2>
-    <ul>
-      <li><strong>Starter VA Support</strong> - Ideal for solo entrepreneurs</li>
-      <li><strong>Full Admin Suite</strong> - Perfect for growing teams</li>
-      <li><strong>Custom Quote</strong> - Tailored support for unique needs</li>
-    </ul>
-    <a href="#" class="cta-button" onclick="document.getElementById('quoteModal').style.display='flex'">Get a Quote</a>
-  </section>
+    <!-- Why Choose Us -->
+    <section id="why-choose-us">
+      <div class="container">
+        <h2>Why Choose Whisperwind Workspace</h2>
+        <p class="section-subtitle">
+          Quiet support, clear communication, and systems that feel like they were built for you, not copied from a template.
+        </p>
 
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <p>Email: <a href="mailto:whisperwindworkspace@gmail.com">whisperwindworkspace@gmail.com</a></p>
-    <p>Follow us on social media for updates and insights.</p>
-  </section>
+        <div class="features-grid">
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">🕊️</div>
+            <h3>Calm, Reliable Support</h3>
+            <p>
+              A steady, behind-the-scenes presence that keeps your operations moving without adding noise or chaos.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">🌿</div>
+            <h3>Client-Centered Approach</h3>
+            <p>
+              Timely, thoughtful communication that helps your clients feel seen, supported, and never forgotten.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">⏰</div>
+            <h3>More Time Where It Matters</h3>
+            <p>
+              Delegate recurring admin, follow-ups, and organization so you can focus on strategy and deep work.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">✨</div>
+            <h3>Tailored to Your Rhythm</h3>
+            <p>
+              Support shaped around how you naturally work, so collaboration feels intuitive, not forced.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="section-soft">
+      <div class="container">
+        <h2>Testimonials</h2>
+        <p class="section-subtitle">
+          The best feedback is often quiet: fewer fires, smoother days, and work that finally feels manageable.
+        </p>
+
+        <div class="testimonials-grid">
+          <figure class="testimonial-card" aria-label="Client testimonial">
+            <blockquote>
+              “Since working with Whisperwind Workspace, my inbox is finally manageable and clients are getting timely responses
+              without me living in my email.”
+            </blockquote>
+            <figcaption>
+              <span class="testimonial-name">Alex R.</span>
+              <span class="testimonial-role">Studio Owner</span>
+            </figcaption>
+          </figure>
+
+          <figure class="testimonial-card" aria-label="Client testimonial">
+            <blockquote>
+              “Calm, proactive, and organized. Tasks are handled before I remember to delegate them. It’s like having a quiet
+              operations partner.”
+            </blockquote>
+            <figcaption>
+              <span class="testimonial-name">Janelle M.</span>
+              <span class="testimonial-role">Business Coach</span>
+            </figcaption>
+          </figure>
+
+          <figure class="testimonial-card" aria-label="Client testimonial">
+            <blockquote>
+              “My calendar, follow-ups, and client communication finally feel under control. I can actually focus again.”
+            </blockquote>
+            <figcaption>
+              <span class="testimonial-name">Marcus D.</span>
+              <span class="testimonial-role">Consultant</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <div class="container">
+        <h2>Pricing</h2>
+        <p class="section-subtitle">
+          Flexible support options shaped around your capacity, season, and stage of business.
+        </p>
+        <ul>
+          <li><strong>Starter VA Support</strong> &mdash; Ideal for solo entrepreneurs needing consistent admin support.</li>
+          <li><strong>Full Admin Suite</strong> &mdash; Perfect for growing teams with ongoing coordination needs.</li>
+          <li><strong>Custom Quote</strong> &mdash; Tailored support for unique operations or specialized workflows.</li>
+        </ul>
+        <button
+          type="button"
+          class="cta-button"
+          onclick="openQuoteModal()"
+        >
+          Get a Quote
+        </button>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section-soft">
+      <div class="container">
+        <h2>Frequently Asked Questions</h2>
+        <p class="section-subtitle">
+          A few quiet answers to common questions. If something isn’t covered here, feel free to ask.
+        </p>
+
+        <div class="faq-list">
+          <article class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>What kinds of tasks can you help with?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>
+                Inbox and calendar management, client communication, basic project coordination, data entry, light reporting,
+                documentation, and other recurring admin or operations tasks.
+              </p>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Do you offer custom packages?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>
+                Yes. Support is tailored around your business rhythm, capacity, and preferred tools so it feels seamless to plug in.
+              </p>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>How do we communicate and collaborate?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>
+                We can use your existing systems (email, messaging, or project tools) and set a cadence for updates that feels calm
+                and efficient, not overwhelming.
+              </p>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Is there a minimum commitment?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>
+                Typically there is a minimum engagement so there’s enough time to learn your systems, build momentum, and deliver
+                meaningful results.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <h2>Contact Us</h2>
+        <p class="section-subtitle">
+          Ready to explore support or have questions? Reach out and we can talk through what you need.
+        </p>
+        <p>
+          Email:
+          <a href="mailto:whisperwindworkspace@gmail.com">
+            whisperwindworkspace@gmail.com
+          </a>
+        </p>
+        <p>
+          You can also request a quote directly using the button above to share more about your business and current needs.
+        </p>
+      </div>
+    </section>
+  </main>
 
   <footer>
     <p>&copy; 2025 Whisperwind Workspace. All rights reserved.</p>
   </footer>
 
-  <!-- Modal -->
-  <div id="quoteModal" class="modal">
+  <!-- Quote Modal -->
+  <div id="quoteModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="quoteModalTitle">
     <div class="modal-content">
-      <button class="close-btn" onclick="document.getElementById('quoteModal').style.display='none'">&times;</button>
-      <h2>Request a Quote</h2>
+      <button class="close-btn" type="button" aria-label="Close quote form" onclick="closeQuoteModal()">&times;</button>
+      <h2 id="quoteModalTitle">Request a Quote</h2>
       <form action="https://formspree.io/f/mkgjevkn" method="POST" onsubmit="return validateForm()">
         <label class="required">Name</label>
         <input type="text" name="name" required>
+
         <label class="required">Email</label>
         <input type="email" name="email" required>
+
         <label class="required">Phone Number</label>
         <input type="tel" name="phone" required>
+
         <label class="required">Timezone</label>
         <select name="timezone" required>
           <option value="">Select Timezone</option>
@@ -221,7 +757,7 @@
           <option value="Europe/Paris">Central European Time (UTC+01:00)</option>
           <option value="Africa/Nairobi">East Africa Time (UTC+03:00)</option>
           <option value="Asia/Dubai">Gulf Standard Time (UTC+04:00)</option>
-          <option value="Asia/Kolkata">Indian Standard Time (UTC+05:00)</option>
+          <option value="Asia/Kolkata">Indian Standard Time (UTC+05:30)</option>
           <option value="Asia/Dhaka">Bangladesh Standard Time (UTC+06:00)</option>
           <option value="Asia/Jakarta">Western Indonesian Time (UTC+07:00)</option>
           <option value="Asia/Singapore">Singapore Standard Time (UTC+08:00)</option>
@@ -230,17 +766,139 @@
           <option value="Pacific/Noumea">New Caledonia Time (UTC+11:00)</option>
           <option value="Pacific/Fiji">Fiji Time (UTC+12:00)</option>
         </select>
+
         <label for="additionalDetails">Additional Details (Optional)</label>
-        <textarea id="additionalDetails" name="additionalDetails" rows="4" maxlength="1000" placeholder="Provide any other information here..."></textarea>
+        <textarea
+          id="additionalDetails"
+          name="additionalDetails"
+          rows="4"
+          maxlength="1000"
+          placeholder="Share more about your business, support needs, or current challenges..."
+        ></textarea>
+
         <button type="submit" class="cta-button">Submit</button>
       </form>
     </div>
   </div>
 
+  <!-- Back to top + audio toggle -->
+  <button id="backToTop" aria-label="Back to top">↑</button>
+  <button
+    id="audioToggle"
+    aria-pressed="false"
+    aria-label="Enable background audio"
+  >
+    🔇
+  </button>
+
   <script>
-    document.getElementById('audioToggle').onclick = function() {
-      const audio = new Audio('path_to_your_audio_file.mp3');
-      audio.play();
+    // Quote modal helpers
+    const quoteModal = document.getElementById('quoteModal');
+
+    function openQuoteModal() {
+      quoteModal.style.display = 'flex';
+    }
+
+    function closeQuoteModal() {
+      quoteModal.style.display = 'none';
+    }
+
+    window.addEventListener('click', (e) => {
+      if (e.target === quoteModal) {
+        closeQuoteModal();
+      }
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeQuoteModal();
+      }
+    });
+
+    // Simple client-side validation hook (extend if you want)
+    function validateForm() {
+      // currently relies on HTML5 required attributes; 
+      // you can add custom checks here if needed
+      return true;
+    }
+
+    // Back to top logic
+    const backToTopBtn = document.getElementById('backToTop');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopBtn.classList.add('visible');
+      } else {
+        backToTopBtn.classList.remove('visible');
+      }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // FAQ accordion
+    const faqButtons = document.querySelectorAll('.faq-question');
+
+    faqButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        const answer = btn.nextElementSibling;
+
+        // Close all others for a cleaner experience
+        faqButtons.forEach((otherBtn) => {
+          if (otherBtn !== btn) {
+            otherBtn.setAttribute('aria-expanded', 'false');
+            const otherAnswer = otherBtn.nextElementSibling;
+            if (otherAnswer) otherAnswer.hidden = true;
+            const otherIcon = otherBtn.querySelector('.faq-icon');
+            if (otherIcon) otherIcon.textContent = '+';
+          }
+        });
+
+        btn.setAttribute('aria-expanded', String(!expanded));
+        answer.hidden = expanded;
+
+        const icon = btn.querySelector('.faq-icon');
+        if (icon) icon.textContent = expanded ? '+' : '−';
+      });
+    });
+
+    // Audio toggle
+    const audio = document.getElementById('bgAudio');
+    const audioToggle = document.getElementById('audioToggle');
+
+    if (audio && audioToggle) {
+      let audioEnabled = false;
+
+      const updateAudioUI = () => {
+        audioToggle.setAttribute('aria-pressed', String(audioEnabled));
+        audioToggle.setAttribute(
+          'aria-label',
+          audioEnabled ? 'Mute background audio' : 'Enable background audio'
+        );
+        audioToggle.textContent = audioEnabled ? '🔊' : '🔇';
+      };
+
+      updateAudioUI();
+
+      audioToggle.addEventListener('click', () => {
+        audioEnabled = !audioEnabled;
+        updateAudioUI();
+
+        if (audioEnabled) {
+          audio.muted = false;
+          audio.play().catch(() => {
+            // If autoplay fails, we just silently fail. The irony is intentional.
+          });
+        } else {
+          audio.muted = true;
+          audio.pause();
+        }
+      });
     }
   </script>
 </body>
