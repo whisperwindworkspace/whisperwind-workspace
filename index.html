@@ -3,8 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Whisperwind Workspace</title>
+  <title>Whisperwind Workspace | Virtual Assistant & Online Business Support</title>
+
+  <meta name="description" content="Whisperwind Workspace provides calm, dependable virtual assistant support for online businesses, creatives, and small teams. Inbox & calendar management, client communication, admin systems and tailored VA packages so you can focus on the work that matters most.">
+
+  <link rel="canonical" href="https://whisperwindworkspace.github.io/whisperwind-workspace/" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --bg: #F4F9F9;
@@ -28,7 +33,15 @@
       background-image: url('https://www.transparenttextures.com/patterns/white-feathers.png');
     }
 
-    /* Layout helpers */
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    body.modal-open #backToTop,
+    body.modal-open #audioToggle {
+      display: none;
+    }
+
     .container {
       max-width: 1000px;
       margin: 0 auto;
@@ -49,7 +62,7 @@
 
     header h1 {
       margin: 0;
-      font-size: 2rem;
+      font-size: 2.1rem;
       letter-spacing: 0.03em;
     }
 
@@ -61,22 +74,26 @@
 
     nav {
       margin-top: 0.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.4rem 1rem;
     }
 
     nav a {
-      margin: 0 0.75rem;
       color: var(--text-main);
       text-decoration: none;
       font-weight: 600;
       font-size: 0.95rem;
       position: relative;
+      padding-bottom: 0.1rem;
     }
 
     nav a::after {
       content: '';
       position: absolute;
       left: 0;
-      bottom: -0.25rem;
+      bottom: -0.2rem;
       width: 0;
       height: 2px;
       background-color: var(--accent);
@@ -85,6 +102,10 @@
 
     nav a:hover::after {
       width: 100%;
+    }
+
+    main {
+      padding-bottom: 3rem;
     }
 
     section {
@@ -102,6 +123,11 @@
       margin: 0 0 2rem;
       color: var(--text-muted);
       max-width: 640px;
+      font-size: 0.98rem;
+    }
+
+    p {
+      line-height: 1.6;
     }
 
     footer {
@@ -109,7 +135,6 @@
       padding: 2rem;
       background-color: #DFF5F2;
       color: var(--text-main);
-      margin-top: 2rem;
       font-size: 0.9rem;
     }
 
@@ -146,7 +171,6 @@
       box-shadow: 0 6px 14px rgba(0, 0, 0, 0.16);
     }
 
-    /* Soft sections */
     .section-soft {
       background-color: rgba(184, 216, 216, 0.18);
       border-top: 1px solid rgba(184, 216, 216, 0.4);
@@ -279,22 +303,25 @@
     .modal {
       display: none;
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 999;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.55);
+      z-index: 2000;
       justify-content: center;
       align-items: center;
+      padding: 1.5rem;
     }
 
     .modal-content {
       background-color: #fff;
-      padding: 2rem;
-      border-radius: 10px;
-      max-width: 500px;
-      width: 90%;
+      padding: 1.75rem 1.75rem 1.5rem;
+      border-radius: 14px;
+      max-width: 520px;
+      width: 100%;
+      max-height: calc(100vh - 3rem);
+      overflow-y: auto;
       position: relative;
-      animation: fadeIn 0.4s ease;
+      animation: fadeIn 0.3s ease;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25);
     }
 
     .close-btn {
@@ -313,7 +340,9 @@
       color: red;
     }
 
-    input, select, textarea {
+    input,
+    select,
+    textarea {
       width: 100%;
       padding: 0.5rem;
       margin-top: 0.25rem;
@@ -322,6 +351,7 @@
       border: 1px solid #ccc;
       font-family: inherit;
       font-size: 0.95rem;
+      box-sizing: border-box;
     }
 
     textarea {
@@ -333,8 +363,14 @@
     }
 
     @keyframes fadeIn {
-      from { transform: scale(0.95); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+      from {
+        transform: scale(0.95);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
 
     /* Back to top button */
@@ -415,14 +451,34 @@
       height: auto;
     }
 
-    .feather-icon:nth-of-type(1) { top: 10%; left: 10%; animation-delay: 0s; }
-    .feather-icon:nth-of-type(2) { top: 30%; left: 80%; animation-delay: 4s; }
-    .feather-icon:nth-of-type(3) { top: 55%; left: 20%; animation-delay: 2s; }
+    .feather-icon:nth-of-type(1) {
+      top: 10%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .feather-icon:nth-of-type(2) {
+      top: 30%;
+      left: 80%;
+      animation-delay: 4s;
+    }
+
+    .feather-icon:nth-of-type(3) {
+      top: 55%;
+      left: 20%;
+      animation-delay: 2s;
+    }
 
     @keyframes drift {
-      0% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(40px) rotate(12deg); }
-      100% { transform: translateY(0) rotate(0deg); }
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+      50% {
+        transform: translateY(40px) rotate(12deg);
+      }
+      100% {
+        transform: translateY(0) rotate(0deg);
+      }
     }
 
     /* Responsive */
@@ -437,12 +493,17 @@
         padding: 0 1.25rem;
       }
 
-      nav a {
-        display: inline-block;
-        margin: 0.25rem 0.4rem;
+      section {
+        padding: 3rem 0;
       }
 
-      .feather-icon { display: none; }
+      header h1 {
+        font-size: 1.8rem;
+      }
+
+      header p {
+        font-size: 1.4rem;
+      }
 
       .features-grid {
         grid-template-columns: 1fr;
@@ -451,9 +512,42 @@
       .testimonials-grid {
         grid-template-columns: 1fr;
       }
+    }
 
-      section {
-        padding: 3rem 0;
+    @media (max-width: 600px) {
+      .modal {
+        padding: 1rem;
+      }
+
+      .modal-content {
+        padding: 1.25rem 1.25rem 1.1rem;
+        border-radius: 10px;
+        max-width: 100%;
+      }
+
+      nav {
+        gap: 0.25rem 0.75rem;
+      }
+
+      nav a {
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.6rem;
+      }
+
+      header p {
+        font-size: 1.25rem;
+      }
+
+      #backToTop,
+      #audioToggle {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1.15rem;
       }
     }
   </style>
@@ -479,7 +573,7 @@
          aria-hidden="true">
   </div>
 
-  <!-- Background audio -->
+  <!-- Background audio (replace src with an actual file if you use it) -->
   <audio id="bgAudio" src="path_to_your_audio_file.mp3" loop muted></audio>
 
   <header>
@@ -508,7 +602,8 @@
         </p>
         <p>
           Whether you're a solo entrepreneur or leading a small team, having a quiet, reliable support partner
-          makes it easier to stay present with the work that matters most.
+          makes it easier to stay present with the work that matters most. From inbox and calendar management
+          to client communication and documentation, we help keep the back-end of your business grounded.
         </p>
       </div>
     </section>
@@ -520,11 +615,11 @@
           Gentle, highly organized support behind the scenes, tailored to the rhythm of your business.
         </p>
         <ul>
-          <li>Executive Assistance & admin support</li>
-          <li>Inbox & calendar management</li>
-          <li>Client & customer support follow-ups</li>
-          <li>Data entry, light reporting & documentation</li>
-          <li>Project coordination & task tracking</li>
+          <li>Executive assistance and admin support</li>
+          <li>Inbox and calendar management</li>
+          <li>Client and customer support follow-ups</li>
+          <li>Data entry, light reporting and documentation</li>
+          <li>Project coordination and task tracking</li>
           <li>Custom VA packages for unique workflows</li>
         </ul>
       </div>
@@ -559,7 +654,7 @@
             <div class="feature-icon" aria-hidden="true">⏰</div>
             <h3>More Time Where It Matters</h3>
             <p>
-              Delegate recurring admin, follow-ups, and organization so you can focus on strategy and deep work.
+              Delegate recurring admin, follow-ups and organization so you can focus on strategy and deep work.
             </p>
           </article>
 
@@ -596,8 +691,8 @@
 
           <figure class="testimonial-card" aria-label="Client testimonial">
             <blockquote>
-              “Calm, proactive, and organized. Tasks are handled before I remember to delegate them. It’s like having a quiet
-              operations partner.”
+              “Calm, proactive and organized. Tasks are handled before I remember to delegate them. It feels like having
+              a quiet operations partner.”
             </blockquote>
             <figcaption>
               <span class="testimonial-name">Janelle M.</span>
@@ -607,7 +702,7 @@
 
           <figure class="testimonial-card" aria-label="Client testimonial">
             <blockquote>
-              “My calendar, follow-ups, and client communication finally feel under control. I can actually focus again.”
+              “My calendar, follow-ups and client communication finally feel under control. I can actually focus again.”
             </blockquote>
             <figcaption>
               <span class="testimonial-name">Marcus D.</span>
@@ -668,7 +763,7 @@
             </button>
             <div class="faq-answer" hidden>
               <p>
-                Yes. Support is tailored around your business rhythm, capacity, and preferred tools so it feels seamless to plug in.
+                Yes. Support is tailored around your business rhythm, capacity and preferred tools so it feels seamless to plug in.
               </p>
             </div>
           </article>
@@ -680,7 +775,7 @@
             </button>
             <div class="faq-answer" hidden>
               <p>
-                We can use your existing systems (email, messaging, or project tools) and set a cadence for updates that feels calm
+                We can use your existing systems (email, messaging or project tools) and set a cadence for updates that feels calm
                 and efficient, not overwhelming.
               </p>
             </div>
@@ -792,15 +887,16 @@
   </button>
 
   <script>
-    // Quote modal helpers
     const quoteModal = document.getElementById('quoteModal');
 
     function openQuoteModal() {
       quoteModal.style.display = 'flex';
+      document.body.classList.add('modal-open');
     }
 
     function closeQuoteModal() {
       quoteModal.style.display = 'none';
+      document.body.classList.remove('modal-open');
     }
 
     window.addEventListener('click', (e) => {
@@ -815,14 +911,10 @@
       }
     });
 
-    // Simple client-side validation hook (extend if you want)
     function validateForm() {
-      // currently relies on HTML5 required attributes; 
-      // you can add custom checks here if needed
       return true;
     }
 
-    // Back to top logic
     const backToTopBtn = document.getElementById('backToTop');
 
     window.addEventListener('scroll', () => {
@@ -840,7 +932,6 @@
       });
     });
 
-    // FAQ accordion
     const faqButtons = document.querySelectorAll('.faq-question');
 
     faqButtons.forEach((btn) => {
@@ -848,7 +939,6 @@
         const expanded = btn.getAttribute('aria-expanded') === 'true';
         const answer = btn.nextElementSibling;
 
-        // Close all others for a cleaner experience
         faqButtons.forEach((otherBtn) => {
           if (otherBtn !== btn) {
             otherBtn.setAttribute('aria-expanded', 'false');
@@ -867,7 +957,6 @@
       });
     });
 
-    // Audio toggle
     const audio = document.getElementById('bgAudio');
     const audioToggle = document.getElementById('audioToggle');
 
@@ -891,9 +980,7 @@
 
         if (audioEnabled) {
           audio.muted = false;
-          audio.play().catch(() => {
-            // If autoplay fails, we just silently fail. The irony is intentional.
-          });
+          audio.play().catch(() => {});
         } else {
           audio.muted = true;
           audio.pause();
