@@ -988,5 +988,24 @@
       });
     }
   </script>
+<!-- Flowise chat widget -->
+<script type="module">
+  import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js";
+  Chatbot.init({
+    chatflowid: "d9b91ed4-db87-47c8-b109-3c0aefdd1114",
+    apiHost: "https://cloud.flowiseai.com",
+    theme: {
+      button: { backgroundColor: "#5DA9A7", iconColor: "#ffffff", size: "large" },
+      chatWindow: {
+        title: "Whisperwind Assistant",
+        welcomeMessage: "Hi! Ask about services, availability, or operations.",
+        showTitle: true,
+        width: 380,
+        height: 560
+      }
+    }
+  });
+</script>
 </body>
 </html>
+
