@@ -990,38 +990,26 @@
   </script>
 <!-- Flowise chat widget -->
 <script type="module">
-  import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js";
+  import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed@latest/dist/web.js";
 
   Chatbot.init({
-    chatflowid: "d9b91ed4-db87-47c8-b109-3c0aefdd1114",   // your id
+    chatflowid: "d9b91ed4-db87-47c8-b109-3c0aefdd1114",
     apiHost: "https://cloud.flowiseai.com",
-
-    // UI only
-    chatbotConfig: {
+    theme: {
+      button: { backgroundColor: "#5DA9A7", iconColor: "#ffffff", size: "large" },
       chatWindow: {
         title: "Whisperwind Assistant",
-        description: "Ask about teams, locations, and availability.",
+        welcomeMessage: "Hi! Ask about services, availability, or operations.",
         showTitle: true,
-        showDescription: true,
-        showResetButton: true,
-        // hide citations / internal chunks
-        showSourceDocument: false
-      }
-    },
-
-    // Runtime overrides that the embed will apply on every call
-    params: {
-      overrideConfig: {
-        topK: 20,                     // match your canvas
-        returnSourceDocuments: false, // never expose chunks
-        // optional, if you tuned these in Flowise:
-        // similarityScoreThreshold: 0,
-        // temperature: 0.2
+        showSourceDocuments: false,   // hides the internal source chips
+        width: 380,
+        height: 560
       }
     }
   });
 </script>
 </body>
 </html>
+
 
 
